@@ -14,6 +14,8 @@ UNITY_CFLAGS += -DUNITY_OUTPUT_CHAR=UnityOutputCharSpy_OutputChar
 
 SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src/LedDriver \
+  $(PROJECT_HOME_DIR)/src/CircularBuffer \
+
 
 TEST_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/unity\
@@ -30,5 +32,7 @@ INCLUDE_DIRS =\
   $(UNITY_HOME)/extras/fixture/src\
   $(UNITY_HOME)/extras/fixture/test\
   $(PROJECT_HOME_DIR)/include/LedDriver\
+  $(PROJECT_HOME_DIR)/include/CircularBuffer\
+
 
 include $(UNITY_BUILD_HOME)/MakefileWorker.mk

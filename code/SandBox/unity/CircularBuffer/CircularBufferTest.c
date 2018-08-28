@@ -1,5 +1,6 @@
 
 #include "unity_fixture.h"
+#include "CircularBuffer.h"
 
 TEST_GROUP(CircularBuffer);
 
