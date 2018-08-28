@@ -6,4 +6,6 @@
 void MyLedDriver_Create(uint16_t* address);
 
 void MyLedDriver_TurnOn(int ledNumber);
+
+void MyLedDriver_TurnOff(int ledNumber);
 #endif //MY_LED_DRIVER_H

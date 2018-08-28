@@ -8,12 +8,17 @@ void MyLedDriver_Create(uint16_t *address)
     *ledsAddress = 0;
 }
 
+void MyLedDriver_Destroy(void)
+{
+
+}
+
 void MyLedDriver_TurnOn(int ledNumber)
 {
     *ledsAddress = 1;
 }
 
-void MyLedDriver_Destroy(void)
+void MyLedDriver_TurnOff(int ledNumber)
 {
-
+    
 }
