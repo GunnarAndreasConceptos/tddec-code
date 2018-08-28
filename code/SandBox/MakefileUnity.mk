@@ -18,6 +18,7 @@ SRC_DIRS = \
 TEST_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/unity\
 	$(PROJECT_HOME_DIR)/unity/LedDriver\
+  $(PROJECT_HOME_DIR)/unity/CircularBuffer\
 	$(UNITY_HOME)/src\
     $(UNITY_HOME)/extras/fixture/src\
     $(UNITY_HOME)/extras/fixture/test\
