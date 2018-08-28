@@ -65,6 +65,12 @@ TEST(sprintf, InsertString)
 }
 //END: RefactoredTests
 
+TEST(sprintf, InsertDecimal)
+{
+    expect("Hello 55\n");
+    given(sprintf(output, "Hello %d\n", 55));
+}
+
 #else //START: Duplication
 //START: FormatSpace
 TEST(sprintf, NoFormatOperations)
