@@ -23,6 +23,7 @@ UNITY_WARNINGFLAGS = -Wswitch-default
 
 SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src/LedDriver \
+  $(PROJECT_HOME_DIR)/src/MyLedDriver \
 	$(PROJECT_HOME_DIR)/src/HomeAutomation \
 
 TEST_SRC_DIRS = \
@@ -46,6 +47,7 @@ INCLUDE_DIRS =\
   $(UNITY_HOME)/extras/fixture/test\
   $(PROJECT_HOME_DIR)/include/HomeAutomation\
   $(PROJECT_HOME_DIR)/include/LedDriver\
+  $(PROJECT_HOME_DIR)/include/MyLedDriver\
   $(PROJECT_HOME_DIR)/include/util\
   $(PROJECT_HOME_DIR)/mocks\
   
