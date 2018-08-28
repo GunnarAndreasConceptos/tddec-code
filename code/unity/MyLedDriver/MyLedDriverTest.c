@@ -20,3 +20,11 @@ TEST(MyLedDriver, LedsOffAfterCreate)
     MyLedDriver_Create(&virtualLeds);
     TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
 }
+
+TEST(MyLedDriver, TurnOnLedOne)
+{
+    uint16_t virtualLeds;
+    MyLedDriver_Create(&virtualLeds);
+    MyLedDriver_TurnOn(1);
+    TEST_ASSERT_EQUAL_HEX16(1, virtualLeds);
+}
