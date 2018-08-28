@@ -23,24 +23,35 @@ extern "C"
 {
 #include <stdio.h>
 #include <memory.h>
+#include <stdlib.h> 
 }
 
 //START: testGroup
 TEST_GROUP(sprintf)
 {
-    char output[100];
+    char* output;
     const char * expected;
     void setup()
     {
-        memset(output, 0xaa, sizeof output);
+        output = NULL;
         expected = "";
     }
     void teardown()
     {
+        if (output != NULL)
+        {
+            free(output);
+            output = NULL;
+        }
     }
     void expect(const char * s)
     {
         expected = s;
+        //We need to add 2 bytes for string null terminator and keep the last byte for our 0xAA memory tests
+        size_t output_size = strlen(expected) + 2;
+        output = (char*)malloc(output_size);
+        memset(output, 0xaa, output_size);
+
     }
     void given(int charsWritten)
     {

@@ -55,7 +55,7 @@ static void expect(const char * s)
     expected = s;
     //We add two bytes, one for nullterminator and one for our 0xAA check.
     size_t output_size = strlen(expected) + 2;
-    output = malloc(output_size);
+    output = (char*) malloc(output_size);
     memset(output, 0xaa, output_size);
 }
 
