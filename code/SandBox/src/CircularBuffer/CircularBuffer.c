@@ -14,3 +14,8 @@ int CircularBuffer_GetCapacity()
 {
     return 4;
 }
+
+void CircularBuffer_Enqueue(int numberToQueue)
+{
+
+}

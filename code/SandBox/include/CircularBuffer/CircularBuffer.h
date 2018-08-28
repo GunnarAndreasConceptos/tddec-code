@@ -7,4 +7,6 @@ int CircularBuffer_GetSize();
 
 int CircularBuffer_GetCapacity();
 
+void CircularBuffer_Enqueue(int numberToQueue);
+
 #endif //CIRCULAR_BUFFER_H
