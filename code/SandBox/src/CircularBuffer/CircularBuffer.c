@@ -12,5 +12,5 @@ int CircularBuffer_Size()
 
 int CircularBuffer_GetCapacity()
 {
-    return 0;
+    return 4;
 }
