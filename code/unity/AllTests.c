@@ -44,6 +44,7 @@ static void RunAllTests(void)
 static void RunAllTests(void)
 {
     /*    RUN_TEST_GROUP(unity); */
+    RUN_TEST_GROUP(MyLedDriver);
     RUN_TEST_GROUP(LedDriver);
     RUN_TEST_GROUP(sprintf);
     RUN_TEST_GROUP(UnityFixture);

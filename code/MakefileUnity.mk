@@ -29,6 +29,7 @@ TEST_SRC_DIRS = \
 	$(PROJECT_TEST_DIR)\
 	$(PROJECT_TEST_DIR)/HomeAutomation\
 	$(PROJECT_TEST_DIR)/LedDriver\
+  $(PROJECT_TEST_DIR)/MyLedDriver\
 	$(PROJECT_TEST_DIR)/stdio\
 	$(UNITY_HOME)/unity\
 	$(UNITY_HOME)/src\
