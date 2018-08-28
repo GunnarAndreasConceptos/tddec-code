@@ -6,6 +6,7 @@ TEST_GROUP(CircularBuffer);
 
 TEST_SETUP(CircularBuffer)
 {
+    CircularBuffer_Create(4);
 }
 
 TEST_TEAR_DOWN(CircularBuffer)
@@ -14,15 +15,12 @@ TEST_TEAR_DOWN(CircularBuffer)
 
 TEST(CircularBuffer, ListEmptyOnCreate)
 {
-    CircularBuffer_Create(1);
-    int numberOfElementsInList = CircularBuffer_Size();
-    TEST_ASSERT_EQUAL(0, numberOfElementsInList);
+    int numberOfElementsInList = CircularBuffer_GetSize();
+    TEST_ASSERT_EQUAL_INT(0, numberOfElementsInList);
 }
 
 TEST(CircularBuffer, QueryListCapacity)
 {
-    CircularBuffer_Create(4);
     int listCapacity = CircularBuffer_GetCapacity();
     TEST_ASSERT_EQUAL_INT(4, listCapacity);
 }
-

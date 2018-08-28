@@ -5,7 +5,7 @@ void CircularBuffer_Create(int capacity)
 
 }
 
-int CircularBuffer_Size()
+int CircularBuffer_GetSize()
 {
     return 0;
 }
