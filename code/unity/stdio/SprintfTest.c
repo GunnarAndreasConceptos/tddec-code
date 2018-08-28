@@ -72,6 +72,12 @@ TEST(sprintf, InsertString)
 #endif  
 
 /* to run this also change in SprintfTestRunner.c */
+TEST(sprintf, InsertDecimal)
+{
+    expect("Hello 54\n");
+    given(sprintf(output, "Hello %d\n", 54));
+}
+
 #if 0 
 TEST(sprintf, NoFormatOperations)
 {
