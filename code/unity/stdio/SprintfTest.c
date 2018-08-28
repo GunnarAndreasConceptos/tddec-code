@@ -28,25 +28,35 @@
 #include "unity_fixture.h"
 #include <stdio.h>
 #include <memory.h>
+#include <stdlib.h> 
 
 TEST_GROUP(sprintf);
 
-static char output[100];
+static char *output;
 static const char * expected;
 
 TEST_SETUP(sprintf)
 {
-    memset(output, 0xaa, sizeof output);
+    output = NULL;
     expected = "";
 }
 
 TEST_TEAR_DOWN(sprintf)
 {
+    if (output != NULL)
+    {
+        free(output);
+        output = NULL;
+    }
 }
 
 static void expect(const char * s)
 {
     expected = s;
+    //We add two bytes, one for nullterminator and one for our 0xAA check.
+    size_t output_size = strlen(expected) + 2;
+    output = malloc(output_size);
+    memset(output, 0xaa, output_size);
 }
 
 static void given(int charsWritten)
