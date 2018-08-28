@@ -18,3 +18,11 @@ TEST(CircularBuffer, ListEmptyOnCreate)
     int numberOfElementsInList = CircularBuffer_Size();
     TEST_ASSERT_EQUAL(0, numberOfElementsInList);
 }
+
+TEST(CircularBuffer, QueryListCapacity)
+{
+    CircularBuffer_Create(4);
+    int listCapacity = CircularBuffer_GetCapacity();
+    TEST_ASSERT_EQUAL_INT(4, listCapacity);
+}
+
