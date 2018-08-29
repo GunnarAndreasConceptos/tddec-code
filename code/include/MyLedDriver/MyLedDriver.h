@@ -16,4 +16,7 @@ void MyLedDriver_TurnOff(int ledNumber);
 void MyLedDriver_TurnAllOn();
 
 BOOL MyLedDriver_IsOn(int ledNumber);
+
+BOOL MyLedDriver_IsOff(int ledNumber);
+
 #endif //MY_LED_DRIVER_H
