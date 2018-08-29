@@ -13,5 +13,8 @@ TEST_GROUP_RUNNER(MyLedDriver)
     RUN_TEST_CASE(MyLedDriver, OutOfBoundsTurnOnDoesNoHarm);
     RUN_TEST_CASE(MyLedDriver, OutOfBoundsTurnOffDoesNoHarm);
     RUN_TEST_CASE(MyLedDriver, OutOfBoundsProducesRuntimeError);
+    RUN_TEST_CASE(MyLedDriver, IsOn);
+
+    //This test is being ignored, but seems to cause test after also being ignored. Ensure this is at the end
     RUN_TEST_CASE(MyLedDriver, OutOfBoundsToDo);
 }
