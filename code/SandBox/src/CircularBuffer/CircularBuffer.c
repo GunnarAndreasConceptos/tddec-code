@@ -4,12 +4,20 @@
 static int* buffer;
 static int head;
 static int tail;
+static int bufferCapacity;
 
 void CircularBuffer_Create(int capacity)
 {
     head = 0;
     tail = 0;
-    buffer = malloc(sizeof(int) * capacity);
+    bufferCapacity = capacity;
+
+    if (buffer != NULL)
+    {
+        free(buffer);
+    }
+
+    buffer = malloc(sizeof(int) * bufferCapacity);
 }
 
 void CircularBuffer_Destroy()
@@ -28,7 +36,7 @@ int CircularBuffer_GetSize()
 
 int CircularBuffer_GetCapacity()
 {
-    return 4;
+    return bufferCapacity;
 }
 
 void CircularBuffer_Enqueue(int numberToQueue)
