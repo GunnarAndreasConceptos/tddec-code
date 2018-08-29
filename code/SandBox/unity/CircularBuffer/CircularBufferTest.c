@@ -11,6 +11,7 @@ TEST_SETUP(CircularBuffer)
 
 TEST_TEAR_DOWN(CircularBuffer)
 {
+    CircularBuffer_Destroy();
 }
 
 TEST(CircularBuffer, ListEmptyOnCreate)
@@ -28,15 +29,13 @@ TEST(CircularBuffer, QueryListCapacity)
 TEST(CircularBuffer, EnqueueToList)
 {
     CircularBuffer_Enqueue(1);
-    CircularBuffer_Enqueue(2);
-    TEST_ASSERT_EQUAL_INT(2, CircularBuffer_GetSize());
+    TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize());
 }
 
 TEST(CircularBuffer, DequeueFromList)
 {
     CircularBuffer_Enqueue(2);
-    CircularBuffer_Enqueue(3);
     int dequedValue = CircularBuffer_Dequeue();
-    TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize());
+    TEST_ASSERT_EQUAL_INT(0, CircularBuffer_GetSize());
     TEST_ASSERT_EQUAL_INT(2, dequedValue);
 }
