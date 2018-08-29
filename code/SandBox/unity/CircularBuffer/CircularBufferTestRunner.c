@@ -10,4 +10,5 @@ TEST_GROUP_RUNNER(CircularBuffer)
     RUN_TEST_CASE(CircularBuffer, DequeueManyToList);
     RUN_TEST_CASE(CircularBuffer, NewCapacityTest);
     RUN_TEST_CASE(CircularBuffer, DetectListIsFull);
+    RUN_TEST_CASE(CircularBuffer, DetectListIsEmpty);
 }
