@@ -75,11 +75,21 @@ TEST(MyLedDriver, UpperAndLowerBounds)
     TEST_ASSERT_EQUAL_HEX16(0x8001, virtualLeds);
 }
 
-TEST(MyLedDriver, OutOfBoundsChangesNothing)
+TEST(MyLedDriver, OutOfBoundsTurnOnDoesNoHarm)
 {
     MyLedDriver_TurnOn(-1);
     MyLedDriver_TurnOn(0);
     MyLedDriver_TurnOn(17);
     MyLedDriver_TurnOn(3141);
     TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
+}
+
+TEST(MyLedDriver, OutOfBoundsTurnOffDoesNoHarm)
+{
+    MyLedDriver_TurnAllOn();
+    MyLedDriver_TurnOff(-1);
+    MyLedDriver_TurnOff(0);
+    MyLedDriver_TurnOff(17);
+    MyLedDriver_TurnOff(3141);
+    TEST_ASSERT_EQUAL_HEX16(0xffff, virtualLeds);
 }
