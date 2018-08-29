@@ -74,3 +74,12 @@ TEST(MyLedDriver, UpperAndLowerBounds)
     MyLedDriver_TurnOn(16);
     TEST_ASSERT_EQUAL_HEX16(0x8001, virtualLeds);
 }
+
+TEST(MyLedDriver, OutOfBoundsChangesNothing)
+{
+    MyLedDriver_TurnOn(-1);
+    MyLedDriver_TurnOn(0);
+    MyLedDriver_TurnOn(17);
+    MyLedDriver_TurnOn(3141);
+    TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
+}

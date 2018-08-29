@@ -10,4 +10,5 @@ TEST_GROUP_RUNNER(MyLedDriver)
     RUN_TEST_CASE(MyLedDriver, AllOn);
     RUN_TEST_CASE(MyLedDriver, LedMemoryIsNotReadable);
     RUN_TEST_CASE(MyLedDriver, UpperAndLowerBounds);
+    RUN_TEST_CASE(MyLedDriver, OutOfBoundsChangesNothing);
 }
