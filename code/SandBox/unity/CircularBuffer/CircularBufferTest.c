@@ -70,10 +70,12 @@ TEST(CircularBuffer, NewCapacityTest)
 
 TEST(CircularBuffer, DetectListIsFull)
 {
-    CircularBuffer_Enqueue(1);
-    CircularBuffer_Enqueue(2);
-    CircularBuffer_Enqueue(3);
-    CircularBuffer_Enqueue(4);
+    TEST_ASSERT_FALSE(CircularBuffer_IsFull());
+    int i;
+    for (i = 0; i < bufferCapacity; i++)
+    {
+        CircularBuffer_Enqueue(i);
+    }
 
     TEST_ASSERT_TRUE(CircularBuffer_IsFull());
 }

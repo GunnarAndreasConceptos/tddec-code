@@ -53,3 +53,8 @@ int CircularBuffer_Dequeue()
     head++;
     return numberToDequeue;
 }
+
+BOOL CircularBuffer_IsFull()
+{
+    return CircularBuffer_GetSize() == bufferCapacity;
+}
