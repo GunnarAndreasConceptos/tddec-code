@@ -35,3 +35,12 @@ TEST(MyLedDriver, TurnOffLedOne)
     MyLedDriver_TurnOff(1);
     TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
 }
+
+TEST(MyLedDriver, TurnOnMultipleLeds)
+{
+    //Tests should be documenting, and bit 9 and 8 give:
+    //0001 1000 000, which gives a recognizable pattern to verify in hex: 0x180
+    MyLedDriver_TurnOn(9);
+    MyLedDriver_TurnOn(8);
+    TEST_ASSERT_EQUAL_HEX16(0x180, virtualLeds);
+}
