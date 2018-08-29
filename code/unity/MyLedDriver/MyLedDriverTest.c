@@ -102,3 +102,8 @@ TEST(MyLedDriver, OutOfBoundsProducesRuntimeError)
         MyRuntimeErrorStub_GetLastError());
     TEST_ASSERT_EQUAL(-1, MyRuntimeErrorStub_GetLastParameter());
 }
+
+IGNORE_TEST(MyLedDriver, OutOfBoundsToDo)
+{
+    /* TODO: What should we do during runtime? */
+}
