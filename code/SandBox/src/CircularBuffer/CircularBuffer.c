@@ -6,27 +6,28 @@ static int head;
 static int tail;
 static int bufferCapacity;
 
-void CircularBuffer_Create(int capacity)
-{
-    head = 0;
-    tail = 0;
-    bufferCapacity = capacity;
-
-    if (buffer != NULL)
-    {
-        free(buffer);
-    }
-
-    buffer = malloc(sizeof(int) * bufferCapacity);
-}
-
-void CircularBuffer_Destroy()
+static void FreeBufferIfSet()
 {
     if (buffer != NULL)
     {
         free(buffer);
         buffer = NULL;
     }
+}
+
+void CircularBuffer_Create(int capacity)
+{
+    head = 0;
+    tail = 0;
+    bufferCapacity = capacity;
+
+    FreeBufferIfSet();
+    buffer = malloc(sizeof(int) * bufferCapacity);
+}
+
+void CircularBuffer_Destroy()
+{
+    FreeBufferIfSet();
 }
 
 int CircularBuffer_GetSize()
