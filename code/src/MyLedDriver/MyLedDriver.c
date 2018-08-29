@@ -27,3 +27,8 @@ void MyLedDriver_TurnOff(int ledNumber)
 {
     *ledsAddress = 0;
 }
+
+void MyLedDriver_TurnAllOn()
+{
+    *ledsAddress = 0xffff;
+}
