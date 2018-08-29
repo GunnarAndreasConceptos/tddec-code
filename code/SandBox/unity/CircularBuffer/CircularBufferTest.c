@@ -4,9 +4,11 @@
 
 TEST_GROUP(CircularBuffer);
 
+static const int bufferCapacity = 4;
+
 TEST_SETUP(CircularBuffer)
 {
-    CircularBuffer_Create(4);
+    CircularBuffer_Create(bufferCapacity);
 }
 
 TEST_TEAR_DOWN(CircularBuffer)
@@ -65,3 +67,14 @@ TEST(CircularBuffer, NewCapacityTest)
     CircularBuffer_Create(5);
     TEST_ASSERT_EQUAL_INT(5, CircularBuffer_GetCapacity());
 }
+
+TEST(CircularBuffer, DetectListIsFull)
+{
+    CircularBuffer_Enqueue(1);
+    CircularBuffer_Enqueue(2);
+    CircularBuffer_Enqueue(3);
+    CircularBuffer_Enqueue(4);
+
+    TEST_ASSERT_TRUE(CircularBuffer_IsFull());
+}
+
