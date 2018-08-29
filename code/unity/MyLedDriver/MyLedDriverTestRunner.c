@@ -12,4 +12,5 @@ TEST_GROUP_RUNNER(MyLedDriver)
     RUN_TEST_CASE(MyLedDriver, UpperAndLowerBounds);
     RUN_TEST_CASE(MyLedDriver, OutOfBoundsTurnOnDoesNoHarm);
     RUN_TEST_CASE(MyLedDriver, OutOfBoundsTurnOffDoesNoHarm);
+    RUN_TEST_CASE(MyLedDriver, OutOfBoundsProducesRuntimeError);
 }
