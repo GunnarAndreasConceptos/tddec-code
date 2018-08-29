@@ -57,3 +57,12 @@ TEST(MyLedDriver, TurnOffAnyLed)
     MyLedDriver_TurnOff(8);
     TEST_ASSERT_EQUAL_HEX16(0xff7f, virtualLeds);
 }
+
+//We now that the led memory is not supposed to be readable
+//This test ensures our implementation simulates this by not reading from virtualLeds directly.
+TEST(MyLedDriver, LedMemoryIsNotReadable)
+{
+    virtualLeds = 0xffff;
+    MyLedDriver_TurnOn(8);
+    TEST_ASSERT_EQUAL_HEX16(0x80, virtualLeds);
+}
