@@ -58,3 +58,8 @@ BOOL CircularBuffer_IsFull()
 {
     return CircularBuffer_GetSize() == bufferCapacity;
 }
+
+BOOL CircularBuffer_IsEmpty()
+{
+    return CircularBuffer_GetSize() == 0;
+}
