@@ -47,3 +47,15 @@ TEST(CircularBuffer, EnqueueManyToList)
     CircularBuffer_Enqueue(3);
     TEST_ASSERT_EQUAL_INT(3, CircularBuffer_GetSize());
 }
+
+TEST(CircularBuffer, DequeueManyToList)
+{
+    CircularBuffer_Enqueue(1);
+    CircularBuffer_Enqueue(2);
+    CircularBuffer_Enqueue(3);
+
+    int dequedValue = CircularBuffer_Dequeue();
+    dequedValue = CircularBuffer_Dequeue();
+    TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize());
+    TEST_ASSERT_EQUAL_INT(2, dequedValue);
+}
