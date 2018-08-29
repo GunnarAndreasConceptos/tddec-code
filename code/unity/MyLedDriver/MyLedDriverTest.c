@@ -107,3 +107,10 @@ IGNORE_TEST(MyLedDriver, OutOfBoundsToDo)
 {
     /* TODO: What should we do during runtime? */
 }
+
+TEST(MyLedDriver, IsOn)
+{
+    TEST_ASSERT_FALSE(MyLedDriver_IsOn(11));
+    MyLedDriver_TurnOn(11);
+    TEST_ASSERT_TRUE(MyLedDriver_IsOn(11));
+}
