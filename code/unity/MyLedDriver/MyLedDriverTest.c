@@ -147,3 +147,10 @@ TEST(MyLedDriver, TurnOffMultipleLeds)
     MyLedDriver_TurnOff(8);
     TEST_ASSERT_EQUAL_HEX16((~0x180)&0xffff, virtualLeds);
 }
+
+TEST(MyLedDriver, AllOff)
+{
+    MyLedDriver_TurnAllOn();
+    MyLedDriver_TurnAllOff();
+    TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
+}
