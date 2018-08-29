@@ -1,4 +1,5 @@
 #include "MyLedDriver.h"
+#include "MyRuntimeError.h"
 
 enum 
 {
@@ -35,6 +36,7 @@ void MyLedDriver_TurnOn(int ledNumber)
 {
     if (ledNumber <= 0 || ledNumber > 16)
     {
+        MYRUNTIME_ERROR("LED Driver: out-of-bounds LED", ledNumber);
         return;
     }
 
