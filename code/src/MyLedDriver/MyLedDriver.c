@@ -101,3 +101,9 @@ BOOL MyLedDriver_IsOff(int ledNumber)
 {
     return !MyLedDriver_IsOn(ledNumber);
 }
+
+void MyLedDriver_TurnAllOff()
+{
+    ledsImage = ALL_LEDS_OFF;
+    updateHardware();
+}
