@@ -139,3 +139,11 @@ TEST(MyLedDriver, IsOff)
     MyLedDriver_TurnOn(12);
     TEST_ASSERT_FALSE(MyLedDriver_IsOff(12));
 }
+
+TEST(MyLedDriver, TurnOffMultipleLeds)
+{
+    MyLedDriver_TurnAllOn();
+    MyLedDriver_TurnOff(9);
+    MyLedDriver_TurnOff(8);
+    TEST_ASSERT_EQUAL_HEX16((~0x180)&0xffff, virtualLeds);
+}
