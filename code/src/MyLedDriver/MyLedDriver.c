@@ -31,7 +31,7 @@ void MyLedDriver_TurnOn(int ledNumber)
 
 void MyLedDriver_TurnOff(int ledNumber)
 {
-    *ledsAddress = 0;
+    *ledsAddress &= ~(convertLedNumberToBit(ledNumber));
 }
 
 void MyLedDriver_TurnAllOn()
