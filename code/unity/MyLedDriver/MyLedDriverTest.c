@@ -62,6 +62,7 @@ TEST(MyLedDriver, TurnOffAnyLed)
 //This test ensures our implementation simulates this by not reading from virtualLeds directly.
 TEST(MyLedDriver, LedMemoryIsNotReadable)
 {
+    //We test here that setting virtualLeds variable in the test does not affect the internal leds state of the led driver.
     virtualLeds = 0xffff;
     MyLedDriver_TurnOn(8);
     TEST_ASSERT_EQUAL_HEX16(0x80, virtualLeds);
