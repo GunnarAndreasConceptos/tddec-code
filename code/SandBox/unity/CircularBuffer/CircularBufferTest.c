@@ -59,3 +59,9 @@ TEST(CircularBuffer, DequeueManyToList)
     TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize());
     TEST_ASSERT_EQUAL_INT(2, dequedValue);
 }
+
+TEST(CircularBuffer, NewCapacityTest)
+{
+    CircularBuffer_Create(5);
+    TEST_ASSERT_EQUAL_INT(5, CircularBuffer_GetCapacity());
+}
