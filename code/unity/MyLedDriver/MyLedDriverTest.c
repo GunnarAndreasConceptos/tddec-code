@@ -95,13 +95,23 @@ TEST(MyLedDriver, OutOfBoundsTurnOffDoesNoHarm)
     TEST_ASSERT_EQUAL_HEX16(0xffff, virtualLeds);
 }
 
-TEST(MyLedDriver, OutOfBoundsProducesRuntimeError)
+TEST(MyLedDriver, OutOfBoundsTurnOnProducesRuntimeError)
 {
     MyLedDriver_TurnOn(-1);
     TEST_ASSERT_EQUAL_STRING("LED Driver: out-of-bounds LED",
         MyRuntimeErrorStub_GetLastError());
     TEST_ASSERT_EQUAL(-1, MyRuntimeErrorStub_GetLastParameter());
+    MyRuntimeErrorStub_Reset();
 }
+
+TEST(MyLedDriver, OutOfBoundsTurnOffProducesRuntimeError)
+{
+    MyLedDriver_TurnOff(-1);
+    TEST_ASSERT_EQUAL_STRING("LED Driver: out-of-bounds LED",
+        MyRuntimeErrorStub_GetLastError());
+    TEST_ASSERT_EQUAL(-1, MyRuntimeErrorStub_GetLastParameter());
+}
+
 
 IGNORE_TEST(MyLedDriver, OutOfBoundsToDo)
 {
