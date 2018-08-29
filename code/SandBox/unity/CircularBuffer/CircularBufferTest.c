@@ -91,4 +91,26 @@ TEST(CircularBuffer, ClearList)
     CircularBuffer_Enqueue(1);
     CircularBuffer_Clear();
     TEST_ASSERT_TRUE(CircularBuffer_IsEmpty());
-}  
+} 
+
+TEST(CircularBuffer, EnqueueWrapByOne)
+{
+    int i;
+    int lastValueAdded = 0;
+    for (i = 0; i < bufferCapacity+1; i++)
+    {
+        CircularBuffer_Enqueue(i);
+        lastValueAdded = i;
+    }
+
+    TEST_ASSERT_TRUE(CircularBuffer_IsFull());
+
+    int lastValueRetrieved;
+    for (i = 0; i < bufferCapacity; i++)
+    {
+        lastValueRetrieved = CircularBuffer_Dequeue(i);
+    }
+
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty());
+    TEST_ASSERT_EQUAL_INT(lastValueAdded, lastValueRetrieved);
+}
