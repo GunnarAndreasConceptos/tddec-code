@@ -18,14 +18,12 @@ TEST_TEAR_DOWN(CircularBuffer)
 
 TEST(CircularBuffer, ListEmptyOnCreate)
 {
-    int numberOfElementsInList = CircularBuffer_GetSize();
-    TEST_ASSERT_EQUAL_INT(0, numberOfElementsInList);
+    TEST_ASSERT_EQUAL_INT(0, CircularBuffer_GetSize());
 }
 
 TEST(CircularBuffer, QueryListCapacity)
 {
-    int listCapacity = CircularBuffer_GetCapacity();
-    TEST_ASSERT_EQUAL_INT(4, listCapacity);
+    TEST_ASSERT_EQUAL_INT(bufferCapacity, CircularBuffer_GetCapacity());
 }
 
 TEST(CircularBuffer, EnqueueToList)
