@@ -23,7 +23,13 @@ static void updateHardware()
 
 static BOOL isLedOutOfBounds(int ledNumber)
 {
-    return (ledNumber < FIRST_LED || (ledNumber > LAST_LED));
+    if (ledNumber < FIRST_LED || (ledNumber > LAST_LED))
+    {
+        MYRUNTIME_ERROR("LED Driver: out-of-bounds LED", ledNumber);
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 static uint16_t convertLedNumberToBit(int ledNumber)
@@ -57,7 +63,6 @@ void MyLedDriver_TurnOn(int ledNumber)
 {
     if (isLedOutOfBounds(ledNumber))
     {
-        MYRUNTIME_ERROR("LED Driver: out-of-bounds LED", ledNumber);
         return;
     }
 
