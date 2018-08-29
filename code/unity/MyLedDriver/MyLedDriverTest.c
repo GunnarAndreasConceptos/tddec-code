@@ -124,3 +124,9 @@ TEST(MyLedDriver, IsOn)
     MyLedDriver_TurnOn(11);
     TEST_ASSERT_TRUE(MyLedDriver_IsOn(11));
 }
+
+TEST(MyLedDriver, OutOfBoundsLedsAreAlwaysOff)
+{
+    TEST_ASSERT_FALSE(MyLedDriver_IsOn(0));
+    TEST_ASSERT_FALSE(MyLedDriver_IsOn(17));
+}
