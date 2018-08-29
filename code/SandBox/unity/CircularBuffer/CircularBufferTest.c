@@ -39,3 +39,11 @@ TEST(CircularBuffer, DequeueFromList)
     TEST_ASSERT_EQUAL_INT(0, CircularBuffer_GetSize());
     TEST_ASSERT_EQUAL_INT(2, dequedValue);
 }
+
+TEST(CircularBuffer, EnqueueManyToList)
+{
+    CircularBuffer_Enqueue(1);
+    CircularBuffer_Enqueue(2);
+    CircularBuffer_Enqueue(3);
+    TEST_ASSERT_EQUAL_INT(3, CircularBuffer_GetSize());
+}

@@ -1,15 +1,29 @@
 #include "CircularBuffer.h"
+#include <stdlib.h>
 
-static int numberOfElements;
+static int* buffer;
+static int head;
+static int tail;
 
 void CircularBuffer_Create(int capacity)
 {
-    numberOfElements = 0;
+    head = 0;
+    tail = 0;
+    buffer = malloc(sizeof(int) * capacity);
+}
+
+void CircularBuffer_Destroy()
+{
+    if (buffer != NULL)
+    {
+        free(buffer);
+        buffer = NULL;
+    }
 }
 
 int CircularBuffer_GetSize()
 {
-    return numberOfElements;
+    return tail-head;
 }
 
 int CircularBuffer_GetCapacity()
@@ -19,5 +33,14 @@ int CircularBuffer_GetCapacity()
 
 void CircularBuffer_Enqueue(int numberToQueue)
 {
-    numberOfElements++;
+    //Copy the new element into the buffer
+    buffer[tail] = numberToQueue;
+    tail++;
+}
+
+int CircularBuffer_Dequeue()
+{
+    int numberToDequeue = buffer[head];
+    head++;
+    return numberToDequeue;
 }
