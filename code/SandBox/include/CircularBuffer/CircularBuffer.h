@@ -30,4 +30,6 @@ BOOL CircularBuffer_IsFull();
 
 BOOL CircularBuffer_IsEmpty();
 
+void CircularBuffer_Clear();
+
 #endif //CIRCULAR_BUFFER_H

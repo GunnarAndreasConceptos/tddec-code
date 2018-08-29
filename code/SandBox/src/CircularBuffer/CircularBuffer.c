@@ -63,3 +63,8 @@ BOOL CircularBuffer_IsEmpty()
 {
     return CircularBuffer_GetSize() == 0;
 }
+
+void CircularBuffer_Clear()
+{
+    head = tail;
+}

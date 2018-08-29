@@ -91,4 +91,4 @@ TEST(CircularBuffer, ClearList)
     CircularBuffer_Enqueue(1);
     CircularBuffer_Clear();
     TEST_ASSERT_TRUE(CircularBuffer_IsEmpty());
-}   
+}  
