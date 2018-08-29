@@ -3,6 +3,10 @@
 
 #include "stdint.h"
 
+#define TRUE 1
+#define FALSE 0
+typedef int BOOL;
+
 void MyLedDriver_Create(uint16_t* address);
 
 void MyLedDriver_TurnOn(int ledNumber);
