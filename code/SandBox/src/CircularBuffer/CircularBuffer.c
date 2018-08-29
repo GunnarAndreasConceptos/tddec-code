@@ -1,13 +1,15 @@
 #include "CircularBuffer.h"
 
+static int numberOfElements;
+
 void CircularBuffer_Create(int capacity)
 {
-
+    numberOfElements = 0;
 }
 
 int CircularBuffer_GetSize()
 {
-    return 0;
+    return numberOfElements;
 }
 
 int CircularBuffer_GetCapacity()
@@ -17,5 +19,5 @@ int CircularBuffer_GetCapacity()
 
 void CircularBuffer_Enqueue(int numberToQueue)
 {
-
+    numberOfElements++;
 }

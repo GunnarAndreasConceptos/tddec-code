@@ -28,5 +28,6 @@ TEST(CircularBuffer, QueryListCapacity)
 TEST(CircularBuffer, EnqueueToList)
 {
     CircularBuffer_Enqueue(1);
-    TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize());
+    CircularBuffer_Enqueue(2);
+    TEST_ASSERT_EQUAL_INT(2, CircularBuffer_GetSize());
 }   
