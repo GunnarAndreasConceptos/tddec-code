@@ -55,5 +55,5 @@ TEST(MyLedDriver, TurnOffAnyLed)
 {
     MyLedDriver_TurnAllOn();
     MyLedDriver_TurnOff(8);
-    TEST_ASSERT_EQUAL_HEX16(0x100, virtualLeds);
+    TEST_ASSERT_EQUAL_HEX16(0xff7f, virtualLeds);
 }
