@@ -44,6 +44,11 @@ void MyLedDriver_TurnOn(int ledNumber)
 
 void MyLedDriver_TurnOff(int ledNumber)
 {
+    if (ledNumber <= 0 || ledNumber > 16)
+    {
+        return;
+    }
+
     ledsImage &= ~(convertLedNumberToBit(ledNumber));
     updateHardware();
 }
