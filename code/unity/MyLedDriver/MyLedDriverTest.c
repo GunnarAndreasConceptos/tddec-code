@@ -166,9 +166,9 @@ TEST(MyLedDriver, TurnOffMultipleLeds)
     MyLedDriver_TurnAllOn();
     MyLedDriver_TurnOff(9);
     MyLedDriver_TurnOff(8);
-    TEST_ASSERT_FALSE(MyLedDriver_IsOff(9));
-    TEST_ASSERT_FALSE(MyLedDriver_IsOff(8));
-    TEST_ASSERT_FALSE(MyLedDriver_IsOn(10));
+    TEST_ASSERT_TRUE(MyLedDriver_IsOff(9));
+    TEST_ASSERT_TRUE(MyLedDriver_IsOff(8));
+    TEST_ASSERT_TRUE(MyLedDriver_IsOn(10));
 }
 
 TEST(MyLedDriver, AllOff)

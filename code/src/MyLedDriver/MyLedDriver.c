@@ -3,7 +3,7 @@
 
 enum 
 {
-    ALL_LEDS_ON = ~0,
+    ALL_LEDS_ON = 0,
     ALL_LEDS_OFF = ~ALL_LEDS_ON    
 };
 
@@ -66,7 +66,7 @@ void MyLedDriver_TurnOn(int ledNumber)
         return;
     }
 
-    setLedImageBit(ledNumber);
+    clearLedImageBit(ledNumber);
     updateHardware();
 }
 
@@ -77,7 +77,7 @@ void MyLedDriver_TurnOff(int ledNumber)
         return;
     }
     
-    clearLedImageBit(ledNumber);
+    setLedImageBit(ledNumber);
     updateHardware();
 }
 
@@ -94,7 +94,7 @@ BOOL MyLedDriver_IsOn(int ledNumber)
         return FALSE;
     }
 
-    return ledsImage & (convertLedNumberToBit(ledNumber));
+    return !(ledsImage & (convertLedNumberToBit(ledNumber)));
 }
 
 BOOL MyLedDriver_IsOff(int ledNumber)
