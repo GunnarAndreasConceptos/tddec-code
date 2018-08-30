@@ -86,6 +86,32 @@ TEST(CircularBuffer, DetectListIsFull)
     TEST_ASSERT_TRUE(CircularBuffer_IsFull(buffer));
 }
 
+TEST(CircularBuffer, ToFullToEmptyToFull)
+{
+    int i;
+    for (i = 0; i < CircularBuffer_GetCapacity(buffer); i++)
+    {
+        CircularBuffer_Enqueue(buffer, i);
+    }
+
+    TEST_ASSERT_TRUE(CircularBuffer_IsFull(buffer));
+
+    for (i = 0; i < CircularBuffer_GetCapacity(buffer); i++)
+    {
+        CircularBuffer_Dequeue(buffer);
+    }
+
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
+
+    for (i = 0; i < CircularBuffer_GetCapacity(buffer); i++)
+    {
+        CircularBuffer_Enqueue(buffer, i);
+    }
+
+    TEST_ASSERT_TRUE(CircularBuffer_IsFull(buffer));
+}   
+
+
 TEST(CircularBuffer, DetectListIsEmpty)
 {
     TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
