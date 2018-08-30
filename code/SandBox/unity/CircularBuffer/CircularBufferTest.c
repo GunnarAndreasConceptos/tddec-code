@@ -19,8 +19,14 @@ TEST_TEAR_DOWN(CircularBuffer)
 
 TEST(CircularBuffer, ListEmptyOnCreate)
 {
-    TEST_ASSERT_EQUAL_INT(0, CircularBuffer_GetSize(buffer));
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
 }
+
+TEST(CircularBuffer, ListNotFullOnCreate)
+{
+    TEST_ASSERT_FALSE(CircularBuffer_IsFull(buffer));
+}
+
 
 TEST(CircularBuffer, QueryListCapacity)
 {
@@ -124,3 +130,4 @@ TEST(CircularBuffer, DequeueReturnsZeroOnEmptyList)
     int emptyListValue = CircularBuffer_Dequeue(buffer);
     TEST_ASSERT_EQUAL_INT(0, emptyListValue);
 }
+
