@@ -142,9 +142,12 @@ TEST(CircularBuffer, EnqueueWrapByDouble)
     TEST_ASSERT_TRUE(CircularBuffer_IsFull(buffer));
 
     int lastValueRetrieved;
+    int expectedFirstValue =  (lastValueAdded - CircularBuffer_GetCapacity(buffer) + 1);
     for (i = 0; i < CircularBuffer_GetCapacity(buffer); i++)
     {
         lastValueRetrieved = CircularBuffer_Dequeue(buffer);
+        int expectedValue = expectedFirstValue + i;
+        TEST_ASSERT_EQUAL_INT(expectedValue, lastValueRetrieved);
     }
 
     TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
