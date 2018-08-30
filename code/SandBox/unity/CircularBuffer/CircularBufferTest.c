@@ -78,7 +78,7 @@ TEST(CircularBuffer, DetectListIsFull)
 {
     TEST_ASSERT_FALSE(CircularBuffer_IsFull(buffer));
     int i;
-    for (i = 0; i < bufferCapacity; i++)
+    for (i = 0; i < CircularBuffer_GetCapacity(buffer); i++)
     {
         CircularBuffer_Enqueue(buffer, i);
     }
@@ -107,7 +107,7 @@ TEST(CircularBuffer, EnqueueWrapByDouble)
 {
     int i;
     int lastValueAdded = 0;
-    for (i = 0; i < bufferCapacity*2; i++)
+    for (i = 0; i < CircularBuffer_GetCapacity(buffer)*2; i++)
     {
         CircularBuffer_Enqueue(buffer, i);
         lastValueAdded = i;
@@ -116,7 +116,7 @@ TEST(CircularBuffer, EnqueueWrapByDouble)
     TEST_ASSERT_TRUE(CircularBuffer_IsFull(buffer));
 
     int lastValueRetrieved;
-    for (i = 0; i < bufferCapacity; i++)
+    for (i = 0; i < CircularBuffer_GetCapacity(buffer); i++)
     {
         lastValueRetrieved = CircularBuffer_Dequeue(buffer);
     }
