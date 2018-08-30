@@ -10,7 +10,7 @@ static uint16_t virtualLeds;
 static void TestAllLedsAreOn()
 {
     int i = 0; 
-    for (i = 0; i < 16; i++)
+    for (i = 1; i <= 16; i++)
     {
         TEST_ASSERT_TRUE(MyLedDriver_IsOn(i));
     }
@@ -19,7 +19,7 @@ static void TestAllLedsAreOn()
 static void TestAllLedsAreOff()
 {
     int i = 0; 
-    for (i = 0; i < 16; i++)
+    for (i = 1; i <= 16; i++)
     {
         TEST_ASSERT_TRUE(MyLedDriver_IsOff(i));
     }
