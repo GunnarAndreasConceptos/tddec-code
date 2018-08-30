@@ -37,7 +37,7 @@ static BOOL isLedOutOfBounds(int ledNumber)
 
 static uint16_t convertLedNumberToBit(int ledNumber)
 {
-    return 1 << (ledNumber - 1);
+    return 1 << (LAST_LED - ledNumber);
 }
 
 static void setLedImageBit(int ledNumber)
@@ -61,7 +61,7 @@ void MyLedDriver_Create(uint16_t *address, BOOL invertLogic)
     }
     else
     {
-        ledsImage = ALL_LEDS_OFF;
+        ledsImage = (uint16_t)ALL_LEDS_OFF;
     }
 
     updateHardware();
@@ -114,7 +114,7 @@ void MyLedDriver_TurnAllOn()
 {
     if (invertedLogic)
     {
-        ledsImage = ALL_LEDS_ON_INVERTED;
+        ledsImage = (uint16_t)ALL_LEDS_ON_INVERTED;
     }
     else
     {
@@ -152,7 +152,7 @@ void MyLedDriver_TurnAllOff()
     }
     else
     {
-        ledsImage = ALL_LEDS_OFF;
+        ledsImage = (uint16_t)ALL_LEDS_OFF;
     }
     updateHardware();
 }
