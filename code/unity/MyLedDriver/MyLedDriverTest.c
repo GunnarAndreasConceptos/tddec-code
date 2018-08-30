@@ -6,6 +6,8 @@
 TEST_GROUP(MyLedDriver);
 
 static uint16_t virtualLeds;
+static BOOL invertLogic = FALSE;
+
 
 static void TestAllLedsAreOn()
 {
@@ -25,9 +27,14 @@ static void TestAllLedsAreOff()
     }
 }
 
+void SetInvertLogic(int invert)
+{
+    invertLogic = (BOOL)invert;
+}
+
 TEST_SETUP(MyLedDriver)
 {
-    MyLedDriver_Create(&virtualLeds);
+    MyLedDriver_Create(&virtualLeds, invertLogic);
 }
 
 TEST_TEAR_DOWN(MyLedDriver)

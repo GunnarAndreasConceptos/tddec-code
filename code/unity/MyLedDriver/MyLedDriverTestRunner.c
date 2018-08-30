@@ -1,6 +1,6 @@
 #include "unity_fixture.h"
 
-TEST_GROUP_RUNNER(MyLedDriver)
+static void RunAllTests()
 {
     RUN_TEST_CASE(MyLedDriver, LedsOffAfterCreate);
     RUN_TEST_CASE(MyLedDriver, TurnOnLedOne);
@@ -21,4 +21,12 @@ TEST_GROUP_RUNNER(MyLedDriver)
     RUN_TEST_CASE(MyLedDriver, AllOff);
     //This test is being ignored, but seems to cause test after also being ignored. Ensure this is at the end
     RUN_TEST_CASE(MyLedDriver, OutOfBoundsToDo);
+}
+
+TEST_GROUP_RUNNER(MyLedDriver)
+{
+    SetInvertLogic(0);
+    RunAllTests();
+    SetInvertLogic(1);
+    RunAllTests();
 }

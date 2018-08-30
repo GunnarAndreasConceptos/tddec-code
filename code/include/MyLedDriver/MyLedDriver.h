@@ -7,7 +7,7 @@
 #define FALSE 0
 typedef int BOOL;
 
-void MyLedDriver_Create(uint16_t* address);
+void MyLedDriver_Create(uint16_t* address, BOOL invertLogic);
 
 void MyLedDriver_TurnOn(int ledNumber);
 
