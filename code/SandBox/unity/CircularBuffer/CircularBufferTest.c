@@ -108,9 +108,15 @@ TEST(CircularBuffer, EnqueueWrapByOne)
     int lastValueRetrieved;
     for (i = 0; i < bufferCapacity; i++)
     {
-        lastValueRetrieved = CircularBuffer_Dequeue(i);
+        lastValueRetrieved = CircularBuffer_Dequeue();
     }
 
     TEST_ASSERT_TRUE(CircularBuffer_IsEmpty());
     TEST_ASSERT_EQUAL_INT(lastValueAdded, lastValueRetrieved);
+}
+
+TEST(CircularBuffer, DequeueReturnsZeroOnEmptyList)
+{
+    int emptyListValue = CircularBuffer_Dequeue();
+    TEST_ASSERT_EQUAL_INT(0, emptyListValue);
 }

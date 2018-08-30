@@ -13,4 +13,5 @@ TEST_GROUP_RUNNER(CircularBuffer)
     RUN_TEST_CASE(CircularBuffer, DetectListIsEmpty);
     RUN_TEST_CASE(CircularBuffer, ClearList);
     RUN_TEST_CASE(CircularBuffer, EnqueueWrapByOne);
+    RUN_TEST_CASE(CircularBuffer, DequeueReturnsZeroOnEmptyList);
 }
