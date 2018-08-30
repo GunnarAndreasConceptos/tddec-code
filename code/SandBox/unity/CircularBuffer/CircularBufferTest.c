@@ -9,7 +9,7 @@ static CircularBufferPtr buffer;
 
 TEST_SETUP(CircularBuffer)
 {
-    CircularBuffer_Create(buffer, bufferCapacity);
+    buffer = CircularBuffer_Create(bufferCapacity);
 }
 
 TEST_TEAR_DOWN(CircularBuffer)
@@ -63,8 +63,9 @@ TEST(CircularBuffer, DequeueManyToList)
 
 TEST(CircularBuffer, NewCapacityTest)
 {
-    CircularBuffer_Create(buffer, 5);
-    TEST_ASSERT_EQUAL_INT(5, CircularBuffer_GetCapacity(buffer));
+    CircularBufferPtr newBuffer = CircularBuffer_Create(5);
+    TEST_ASSERT_EQUAL_INT(5, CircularBuffer_GetCapacity(newBuffer));
+    CircularBuffer_Destroy(newBuffer);
 }
 
 TEST(CircularBuffer, DetectListIsFull)

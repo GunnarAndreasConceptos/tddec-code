@@ -1,99 +1,109 @@
 #include "CircularBuffer.h"
 #include <stdlib.h>
 
-static int* buffer;
-static int head;
-static int tail;
-static int bufferCapacity;
-static int numOfElements;
-
-static void FreeBufferIfSet()
+struct CircularBufferStruct
 {
-    if (buffer != NULL)
+    int head;
+    int tail;
+    int bufferCapacity;
+    int numOfElements;
+    int *buffer;
+};
+
+static void FreeBufferIfSet(CircularBufferPtr circularBuffer)
+{
+
+    if (circularBuffer != NULL)
     {
-        free(buffer);
-        buffer = NULL;
+        if (circularBuffer->buffer != NULL)
+        {
+            free(circularBuffer->buffer);
+        }
+        free(circularBuffer);
+        circularBuffer = NULL;
     }
 }
 
-static void IncrementHead()
+static void IncrementHead(CircularBufferPtr circularBuffer)
 {
-    head = (head + 1) % (bufferCapacity);
+    circularBuffer->head = (circularBuffer->head + 1) % (circularBuffer->bufferCapacity);
 }
 
-static void IncrementTail()
+static void IncrementTail(CircularBufferPtr circularBuffer)
 {
-    tail = (tail + 1) % (bufferCapacity);
+    circularBuffer->tail = (circularBuffer->tail + 1) % (circularBuffer->bufferCapacity);
 }
 
 
-void CircularBuffer_Create(int capacity)
+CircularBufferPtr CircularBuffer_Create(int capacity)
 {
-    head = 0;
-    tail = 0;
-    bufferCapacity = capacity;
-    numOfElements = 0;
+    CircularBufferPtr circularBuffer = malloc(sizeof(struct CircularBufferStruct));
 
-    FreeBufferIfSet();
-    buffer = malloc(sizeof(int) * bufferCapacity);
+    circularBuffer->head = 0;
+    circularBuffer->tail = 0;
+    circularBuffer->bufferCapacity = capacity;
+    circularBuffer->numOfElements = 0;
+    circularBuffer->buffer = malloc(sizeof(int) * capacity);
+
+    return circularBuffer;
 }
 
-void CircularBuffer_Destroy()
+void CircularBuffer_Destroy(CircularBufferPtr circularBuffer)
 {
-    FreeBufferIfSet();
+    FreeBufferIfSet(circularBuffer);
 }
 
-int CircularBuffer_GetSize()
+int CircularBuffer_GetSize(CircularBufferPtr circularBuffer)
 {
-    return numOfElements;
+    return circularBuffer->numOfElements;
 }
 
-int CircularBuffer_GetCapacity()
+int CircularBuffer_GetCapacity(CircularBufferPtr circularBuffer)
 {
-    return bufferCapacity;
+    return circularBuffer->bufferCapacity;
 }
 
-void CircularBuffer_Enqueue(int numberToQueue)
+void CircularBuffer_Enqueue(CircularBufferPtr circularBuffer, int numberToQueue)
 {
-    buffer[head] = numberToQueue;
+    circularBuffer->buffer[circularBuffer->head] = numberToQueue;
 
     //Need to move tail if we are overwriting stuff
-    if (CircularBuffer_IsFull())
+    if (CircularBuffer_IsFull(circularBuffer))
     {
-        IncrementTail();
+        IncrementTail(circularBuffer);
     }
     else
     {
-        numOfElements++;
+        circularBuffer->numOfElements++;
     }
-    IncrementHead();
+    IncrementHead(circularBuffer);
 }
 
-int CircularBuffer_Dequeue()
+int CircularBuffer_Dequeue(CircularBufferPtr circularBuffer)
 {
-    if (CircularBuffer_IsEmpty())
+    if (CircularBuffer_IsEmpty(circularBuffer))
     {
         return 0;
     }
 
-    int numberToDequeue = buffer[tail];
-    IncrementTail();
-    numOfElements--;
+    int numberToDequeue = circularBuffer->buffer[circularBuffer->tail];
+    IncrementTail(circularBuffer);
+    circularBuffer->numOfElements--;
     return numberToDequeue;
 }
 
-BOOL CircularBuffer_IsFull()
+BOOL CircularBuffer_IsFull(CircularBufferPtr circularBuffer)
 {
-    return CircularBuffer_GetSize() == bufferCapacity;
+    return CircularBuffer_GetSize(circularBuffer) == circularBuffer->bufferCapacity;
 }
 
-BOOL CircularBuffer_IsEmpty()
+BOOL CircularBuffer_IsEmpty(CircularBufferPtr circularBuffer)
 {
-    return CircularBuffer_GetSize() == 0;
+    return CircularBuffer_GetSize(circularBuffer) == 0;
 }
 
-void CircularBuffer_Clear()
+void CircularBuffer_Clear(CircularBufferPtr circularBuffer)
 {
-    head = tail;
-    numOfElements = 0;
+    circularBuffer->head = circularBuffer->tail;
+    circularBuffer->numOfElements = 0;
 }

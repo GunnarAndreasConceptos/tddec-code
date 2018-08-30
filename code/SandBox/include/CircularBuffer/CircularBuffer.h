@@ -12,7 +12,7 @@ typedef int BOOL;
 typedef struct CircularBufferStruct *CircularBufferPtr;
 
 
-void CircularBuffer_Create(CircularBufferPtr, int capacity);
+CircularBufferPtr CircularBuffer_Create(int capacity);
 
 void CircularBuffer_Destroy(CircularBufferPtr);
 
