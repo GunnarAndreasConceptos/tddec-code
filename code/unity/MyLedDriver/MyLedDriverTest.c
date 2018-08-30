@@ -85,15 +85,7 @@ TEST(MyLedDriver, TurnOffAnyLed)
 
 TEST(MyLedDriver, InvertLogicIsApplied)
 {
-    if (invertLogic)
-    {
-        virtualLeds = 0;
-    }
-    else
-    {
-        virtualLeds = 0xffff;
-    }
-
+\
     MyLedDriver_TurnOn(8);
     MyLedDriver_TurnOn(9);
 
@@ -104,6 +96,22 @@ TEST(MyLedDriver, InvertLogicIsApplied)
     else
     {
         TEST_ASSERT_EQUAL_HEX16(0x180, virtualLeds);
+    }
+}
+
+TEST(MyLedDriver, MemoryLayoutFlipIsApplied)
+{
+    MyLedDriver_TurnOn(1);
+    MyLedDriver_TurnOn(2);
+    MyLedDriver_TurnOn(16);
+
+    if (invertLogic)
+    {
+        TEST_ASSERT_EQUAL_HEX16(~(0xC001), virtualLeds);
+    }
+    else
+    {
+        TEST_ASSERT_EQUAL_HEX16(0xC001, virtualLeds);
     }
 }
 
@@ -174,7 +182,6 @@ TEST(MyLedDriver, OutOfBoundsTurnOffProducesRuntimeError)
         MyRuntimeErrorStub_GetLastError());
     TEST_ASSERT_EQUAL(-1, MyRuntimeErrorStub_GetLastParameter());
 }
-
 
 IGNORE_TEST(MyLedDriver, OutOfBoundsToDo)
 {
