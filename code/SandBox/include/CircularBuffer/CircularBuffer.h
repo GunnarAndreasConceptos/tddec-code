@@ -8,28 +8,26 @@
 
 typedef int BOOL;
 
-/*
-NB! This circular buffer only works on one static instance.
-To support instances from outside, change interface so that we have an ABT that clients can hold and use create on.
-I am to lazy to add this functionality and will focus on the TTD parts of this project 
-*/
+//Typeless declaration
+typedef struct CircularBufferStruct *CircularBufferPtr;
 
-void CircularBuffer_Create(int capacity);
 
-void CircularBuffer_Destroy();
+void CircularBuffer_Create(CircularBufferPtr, int capacity);
 
-int CircularBuffer_GetSize();
+void CircularBuffer_Destroy(CircularBufferPtr);
 
-int CircularBuffer_GetCapacity();
+int CircularBuffer_GetSize(CircularBufferPtr);
 
-void CircularBuffer_Enqueue(int numberToQueue);
+int CircularBuffer_GetCapacity(CircularBufferPtr);
 
-int CircularBuffer_Dequeue();
+void CircularBuffer_Enqueue(CircularBufferPtr, int numberToQueue);
 
-BOOL CircularBuffer_IsFull();
+int CircularBuffer_Dequeue(CircularBufferPtr);
 
-BOOL CircularBuffer_IsEmpty();
+BOOL CircularBuffer_IsFull(CircularBufferPtr);
 
-void CircularBuffer_Clear();
+BOOL CircularBuffer_IsEmpty(CircularBufferPtr);
+
+void CircularBuffer_Clear(CircularBufferPtr);
 
 #endif //CIRCULAR_BUFFER_H

@@ -5,92 +5,93 @@
 TEST_GROUP(CircularBuffer);
 
 static const int bufferCapacity = 4;
+static CircularBufferPtr buffer;
 
 TEST_SETUP(CircularBuffer)
 {
-    CircularBuffer_Create(bufferCapacity);
+    CircularBuffer_Create(buffer, bufferCapacity);
 }
 
 TEST_TEAR_DOWN(CircularBuffer)
 {
-    CircularBuffer_Destroy();
+    CircularBuffer_Destroy(buffer);
 }
 
 TEST(CircularBuffer, ListEmptyOnCreate)
 {
-    TEST_ASSERT_EQUAL_INT(0, CircularBuffer_GetSize());
+    TEST_ASSERT_EQUAL_INT(0, CircularBuffer_GetSize(buffer));
 }
 
 TEST(CircularBuffer, QueryListCapacity)
 {
-    TEST_ASSERT_EQUAL_INT(bufferCapacity, CircularBuffer_GetCapacity());
+    TEST_ASSERT_EQUAL_INT(bufferCapacity, CircularBuffer_GetCapacity(buffer));
 }
 
 TEST(CircularBuffer, EnqueueToList)
 {
-    CircularBuffer_Enqueue(1);
-    TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize());
+    CircularBuffer_Enqueue(buffer, 1);
+    TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize(buffer));
 }
 
 TEST(CircularBuffer, DequeueFromList)
 {
-    CircularBuffer_Enqueue(2);
-    int dequedValue = CircularBuffer_Dequeue();
-    TEST_ASSERT_EQUAL_INT(0, CircularBuffer_GetSize());
+    CircularBuffer_Enqueue(buffer, 2);
+    int dequedValue = CircularBuffer_Dequeue(buffer);
+    TEST_ASSERT_EQUAL_INT(0, CircularBuffer_GetSize(buffer));
     TEST_ASSERT_EQUAL_INT(2, dequedValue);
 }
 
 TEST(CircularBuffer, EnqueueManyToList)
 {
-    CircularBuffer_Enqueue(1);
-    CircularBuffer_Enqueue(2);
-    CircularBuffer_Enqueue(3);
-    TEST_ASSERT_EQUAL_INT(3, CircularBuffer_GetSize());
+    CircularBuffer_Enqueue(buffer, 1);
+    CircularBuffer_Enqueue(buffer, 2);
+    CircularBuffer_Enqueue(buffer, 3);
+    TEST_ASSERT_EQUAL_INT(3, CircularBuffer_GetSize(buffer));
 }
 
 TEST(CircularBuffer, DequeueManyToList)
 {
-    CircularBuffer_Enqueue(1);
-    CircularBuffer_Enqueue(2);
-    CircularBuffer_Enqueue(3);
+    CircularBuffer_Enqueue(buffer, 1);
+    CircularBuffer_Enqueue(buffer, 2);
+    CircularBuffer_Enqueue(buffer, 3);
 
-    int dequedValue = CircularBuffer_Dequeue();
-    dequedValue = CircularBuffer_Dequeue();
-    TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize());
+    int dequedValue = CircularBuffer_Dequeue(buffer);
+    dequedValue = CircularBuffer_Dequeue(buffer);
+    TEST_ASSERT_EQUAL_INT(1, CircularBuffer_GetSize(buffer));
     TEST_ASSERT_EQUAL_INT(2, dequedValue);
 }
 
 TEST(CircularBuffer, NewCapacityTest)
 {
-    CircularBuffer_Create(5);
-    TEST_ASSERT_EQUAL_INT(5, CircularBuffer_GetCapacity());
+    CircularBuffer_Create(buffer, 5);
+    TEST_ASSERT_EQUAL_INT(5, CircularBuffer_GetCapacity(buffer));
 }
 
 TEST(CircularBuffer, DetectListIsFull)
 {
-    TEST_ASSERT_FALSE(CircularBuffer_IsFull());
+    TEST_ASSERT_FALSE(CircularBuffer_IsFull(buffer));
     int i;
     for (i = 0; i < bufferCapacity; i++)
     {
-        CircularBuffer_Enqueue(i);
+        CircularBuffer_Enqueue(buffer, i);
     }
 
-    TEST_ASSERT_TRUE(CircularBuffer_IsFull());
+    TEST_ASSERT_TRUE(CircularBuffer_IsFull(buffer));
 }
 
 TEST(CircularBuffer, DetectListIsEmpty)
 {
-    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty());
-    CircularBuffer_Enqueue(0);
-    TEST_ASSERT_FALSE(CircularBuffer_IsEmpty());
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
+    CircularBuffer_Enqueue(buffer, 0);
+    TEST_ASSERT_FALSE(CircularBuffer_IsEmpty(buffer));
 }
 
 TEST(CircularBuffer, ClearList)
 {
-    CircularBuffer_Enqueue(0);
-    CircularBuffer_Enqueue(1);
-    CircularBuffer_Clear();
-    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty());
+    CircularBuffer_Enqueue(buffer, 0);
+    CircularBuffer_Enqueue(buffer, 1);
+    CircularBuffer_Clear(buffer);
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
 } 
 
 TEST(CircularBuffer, EnqueueWrapByOne)
@@ -99,24 +100,24 @@ TEST(CircularBuffer, EnqueueWrapByOne)
     int lastValueAdded = 0;
     for (i = 0; i < bufferCapacity + 1; i++)
     {
-        CircularBuffer_Enqueue(i);
+        CircularBuffer_Enqueue(buffer, i);
         lastValueAdded = i;
     }
 
-    TEST_ASSERT_TRUE(CircularBuffer_IsFull());
+    TEST_ASSERT_TRUE(CircularBuffer_IsFull(buffer));
 
     int lastValueRetrieved;
     for (i = 0; i < bufferCapacity; i++)
     {
-        lastValueRetrieved = CircularBuffer_Dequeue();
+        lastValueRetrieved = CircularBuffer_Dequeue(buffer);
     }
 
-    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty());
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
     TEST_ASSERT_EQUAL_INT(lastValueAdded, lastValueRetrieved);
 }
 
 TEST(CircularBuffer, DequeueReturnsZeroOnEmptyList)
 {
-    int emptyListValue = CircularBuffer_Dequeue();
+    int emptyListValue = CircularBuffer_Dequeue(buffer);
     TEST_ASSERT_EQUAL_INT(0, emptyListValue);
 }
