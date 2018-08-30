@@ -1,4 +1,5 @@
 #include "unity_fixture.h"
+#include "MyLedDriverTest.h"
 
 static void RunAllTests()
 {
@@ -8,6 +9,7 @@ static void RunAllTests()
     RUN_TEST_CASE(MyLedDriver, TurnOnMultipleLeds);
     RUN_TEST_CASE(MyLedDriver, TurnOffAnyLed);
     RUN_TEST_CASE(MyLedDriver, AllOn);
+    RUN_TEST_CASE(MyLedDriver, InvertLogicIsApplied);
     RUN_TEST_CASE(MyLedDriver, LedMemoryIsNotReadable);
     RUN_TEST_CASE(MyLedDriver, UpperAndLowerBounds);
     RUN_TEST_CASE(MyLedDriver, OutOfBoundsTurnOnDoesNoHarm);

@@ -47,7 +47,7 @@ static void clearLedImageBit(int ledNumber)
     ledsImage &= ~(convertLedNumberToBit(ledNumber));
 }
 
-void MyLedDriver_Create(uint16_t *address)
+void MyLedDriver_Create(uint16_t *address, BOOL invertLogic)
 {
     ledsAddress = address;
     ledsImage = ALL_LEDS_OFF;

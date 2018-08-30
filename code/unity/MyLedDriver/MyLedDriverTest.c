@@ -44,7 +44,7 @@ TEST_TEAR_DOWN(MyLedDriver)
 
 TEST(MyLedDriver, LedsOffAfterCreate)
 {
-    MyLedDriver_Create(&virtualLeds);
+    MyLedDriver_Create(&virtualLeds, invertLogic);
     TestAllLedsAreOff();
 }
 
@@ -83,16 +83,51 @@ TEST(MyLedDriver, TurnOffAnyLed)
     TEST_ASSERT_TRUE(MyLedDriver_IsOn(9));
 }
 
+TEST(MyLedDriver, InvertLogicIsApplied)
+{
+    if (invertLogic)
+    {
+        virtualLeds = 0;
+    }
+    else
+    {
+        virtualLeds = 0xffff;
+    }
+
+    MyLedDriver_TurnOn(8);
+    MyLedDriver_TurnOn(9);
+
+    if (invertLogic)
+    {
+        TEST_ASSERT_EQUAL_HEX16((~0x180)&0xffff, virtualLeds);
+    }
+    else
+    {
+        TEST_ASSERT_EQUAL_HEX16(0x180, virtualLeds);
+    }
+}
+
+
 //We now that the led memory is not supposed to be readable
 //This test ensures our implementation simulates this by not reading from virtualLeds directly.
 TEST(MyLedDriver, LedMemoryIsNotReadable)
 {
     //We test here that setting virtualLeds variable in the test does not affect the internal leds state of the led driver.
-    //NB! This test is having difficulties for inverted mode
-    virtualLeds = 0;
+    if (invertLogic)
+    {
+        virtualLeds = 0;
+    }
+    else
+    {
+        virtualLeds = 0xffff;
+    }
+
     MyLedDriver_TurnOn(8);
+    MyLedDriver_TurnOn(9);
+
     TEST_ASSERT_TRUE(MyLedDriver_IsOn(8));
-    TEST_ASSERT_TRUE(MyLedDriver_IsOff(9));
+    TEST_ASSERT_TRUE(MyLedDriver_IsOn(9));
+    TEST_ASSERT_TRUE(MyLedDriver_IsOff(10));
 }
 
 TEST(MyLedDriver, UpperAndLowerBounds)
