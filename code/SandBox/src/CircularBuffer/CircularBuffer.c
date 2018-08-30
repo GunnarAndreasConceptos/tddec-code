@@ -61,14 +61,15 @@ void CircularBuffer_Enqueue(int numberToQueue)
 
 int CircularBuffer_Dequeue()
 {
+    if (CircularBuffer_IsEmpty())
+    {
+        return 0;
+    }
+
     int numberToDequeue = buffer[tail];
     tail = (tail + 1) % (bufferCapacity);
 
-    if (!CircularBuffer_IsEmpty())
-    {
-        numOfElements--;
-    }
-
+    numOfElements--;
     return numberToDequeue;
 }
 
