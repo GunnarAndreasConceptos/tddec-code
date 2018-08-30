@@ -95,11 +95,11 @@ TEST(CircularBuffer, ClearList)
     TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
 } 
 
-TEST(CircularBuffer, EnqueueWrapByOne)
+TEST(CircularBuffer, EnqueueWrapByDouble)
 {
     int i;
     int lastValueAdded = 0;
-    for (i = 0; i < bufferCapacity + 1; i++)
+    for (i = 0; i < bufferCapacity*2; i++)
     {
         CircularBuffer_Enqueue(buffer, i);
         lastValueAdded = i;
