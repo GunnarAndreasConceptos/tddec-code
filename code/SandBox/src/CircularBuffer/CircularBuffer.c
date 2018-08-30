@@ -16,6 +16,17 @@ static void FreeBufferIfSet()
     }
 }
 
+static void IncrementHead()
+{
+    head = (head + 1) % (bufferCapacity);
+}
+
+static void IncrementTail()
+{
+    tail = (tail + 1) % (bufferCapacity);
+}
+
+
 void CircularBuffer_Create(int capacity)
 {
     head = 0;
@@ -49,14 +60,13 @@ void CircularBuffer_Enqueue(int numberToQueue)
     //Need to move tail if we are overwriting stuff
     if (CircularBuffer_IsFull())
     {
-        tail = (tail + 1) % (bufferCapacity);
+        IncrementTail();
     }
     else
     {
         numOfElements++;
     }
-
-    head = (head + 1) % (bufferCapacity);
+    IncrementHead();
 }
 
 int CircularBuffer_Dequeue()
@@ -67,8 +77,7 @@ int CircularBuffer_Dequeue()
     }
 
     int numberToDequeue = buffer[tail];
-    tail = (tail + 1) % (bufferCapacity);
-
+    IncrementTail();
     numOfElements--;
     return numberToDequeue;
 }
