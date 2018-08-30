@@ -85,6 +85,8 @@ TEST(CircularBuffer, DetectListIsEmpty)
     TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
     CircularBuffer_Enqueue(buffer, 0);
     TEST_ASSERT_FALSE(CircularBuffer_IsEmpty(buffer));
+    CircularBuffer_Dequeue(buffer);
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(buffer));
 }
 
 TEST(CircularBuffer, ClearList)
