@@ -5,6 +5,7 @@ static int* buffer;
 static int head;
 static int tail;
 static int bufferCapacity;
+static int numOfElements;
 
 static void FreeBufferIfSet()
 {
@@ -20,6 +21,7 @@ void CircularBuffer_Create(int capacity)
     head = 0;
     tail = 0;
     bufferCapacity = capacity;
+    numOfElements = 0;
 
     FreeBufferIfSet();
     buffer = malloc(sizeof(int) * bufferCapacity);
@@ -32,7 +34,7 @@ void CircularBuffer_Destroy()
 
 int CircularBuffer_GetSize()
 {
-    return tail-head;
+    return numOfElements;
 }
 
 int CircularBuffer_GetCapacity()
@@ -42,15 +44,31 @@ int CircularBuffer_GetCapacity()
 
 void CircularBuffer_Enqueue(int numberToQueue)
 {
-    //Copy the new element into the buffer
-    buffer[tail] = numberToQueue;
-    tail++;
+    buffer[head] = numberToQueue;
+
+    //Need to move tail if we are overwriting stuff
+    if (CircularBuffer_IsFull())
+    {
+        tail = (tail + 1) % (bufferCapacity);
+    }
+    else
+    {
+        numOfElements++;
+    }
+
+    head = (head + 1) % (bufferCapacity);
 }
 
 int CircularBuffer_Dequeue()
 {
-    int numberToDequeue = buffer[head];
-    head++;
+    int numberToDequeue = buffer[tail];
+    tail = (tail + 1) % (bufferCapacity);
+
+    if (!CircularBuffer_IsEmpty())
+    {
+        numOfElements--;
+    }
+
     return numberToDequeue;
 }
 
@@ -67,4 +85,5 @@ BOOL CircularBuffer_IsEmpty()
 void CircularBuffer_Clear()
 {
     head = tail;
+    numOfElements = 0;
 }

@@ -97,7 +97,7 @@ TEST(CircularBuffer, EnqueueWrapByOne)
 {
     int i;
     int lastValueAdded = 0;
-    for (i = 0; i < bufferCapacity+1; i++)
+    for (i = 0; i < bufferCapacity + 1; i++)
     {
         CircularBuffer_Enqueue(i);
         lastValueAdded = i;
