@@ -4,7 +4,7 @@
 
 TEST_GROUP(CircularBuffer);
 
-static const int bufferCapacity = 4;
+static const int bufferCapacity = 100;
 static CircularBufferPtr buffer;
 
 TEST_SETUP(CircularBuffer)
