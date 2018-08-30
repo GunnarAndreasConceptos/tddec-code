@@ -3,8 +3,10 @@
 
 enum 
 {
-    ALL_LEDS_ON = 0,
-    ALL_LEDS_OFF = ~ALL_LEDS_ON    
+    ALL_LEDS_ON = 0xffff,
+    ALL_LEDS_OFF = ~ALL_LEDS_ON,
+    ALL_LEDS_ON_INVERTED = ALL_LEDS_OFF,
+    ALL_LEDS_OFF_INVERTED = ALL_LEDS_ON
 };
 
 enum
@@ -15,6 +17,7 @@ enum
 
 static uint16_t* ledsAddress;
 static uint16_t ledsImage;
+static uint16_t invertedLogic;
 
 static void updateHardware()
 {
@@ -50,7 +53,17 @@ static void clearLedImageBit(int ledNumber)
 void MyLedDriver_Create(uint16_t *address, BOOL invertLogic)
 {
     ledsAddress = address;
-    ledsImage = ALL_LEDS_OFF;
+    invertedLogic = invertLogic;
+
+    if (invertedLogic)
+    {
+        ledsImage = ALL_LEDS_OFF_INVERTED;
+    }
+    else
+    {
+        ledsImage = ALL_LEDS_OFF;
+    }
+
     updateHardware();
 }
 
@@ -66,7 +79,15 @@ void MyLedDriver_TurnOn(int ledNumber)
         return;
     }
 
-    clearLedImageBit(ledNumber);
+    if (invertedLogic)
+    {
+        clearLedImageBit(ledNumber);
+    }
+    else
+    {
+        setLedImageBit(ledNumber);
+    }
+
     updateHardware();
 }
 
@@ -77,13 +98,29 @@ void MyLedDriver_TurnOff(int ledNumber)
         return;
     }
     
-    setLedImageBit(ledNumber);
+    if (invertedLogic)
+    {
+        setLedImageBit(ledNumber);
+    }
+    else
+    {
+        clearLedImageBit(ledNumber);
+    }
+
     updateHardware();
 }
 
 void MyLedDriver_TurnAllOn()
 {
-    ledsImage = ALL_LEDS_ON;
+    if (invertedLogic)
+    {
+        ledsImage = ALL_LEDS_ON_INVERTED;
+    }
+    else
+    {
+        ledsImage = ALL_LEDS_ON;
+    }
+
     updateHardware();
 }
 
@@ -94,7 +131,12 @@ BOOL MyLedDriver_IsOn(int ledNumber)
         return FALSE;
     }
 
-    return !(ledsImage & (convertLedNumberToBit(ledNumber)));
+    BOOL retVal = ledsImage & (convertLedNumberToBit(ledNumber));
+    if (invertedLogic)
+    {
+        return !retVal;
+    }
+    return retVal;
 }
 
 BOOL MyLedDriver_IsOff(int ledNumber)
@@ -104,6 +146,13 @@ BOOL MyLedDriver_IsOff(int ledNumber)
 
 void MyLedDriver_TurnAllOff()
 {
-    ledsImage = ALL_LEDS_OFF;
+    if (invertedLogic)
+    {
+        ledsImage = ALL_LEDS_OFF_INVERTED;
+    }
+    else
+    {
+        ledsImage = ALL_LEDS_OFF;
+    }
     updateHardware();
 }
