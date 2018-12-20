@@ -18,12 +18,10 @@ typedef struct
 
 #define MAX_EVENTS 128
 
-static ScheduledLightEvent scheduledEvent;
 static ScheduledLightEvent scheduledEvents[MAX_EVENTS];
 
 void MyLightScheduler_Create(void)
 {
-    scheduledEvent.id = UNUSED;
     int i;
     for (i = 0; i < MAX_EVENTS; i++)
     {
@@ -86,7 +84,6 @@ void MyLightScheduler_WakeUp(void)
     {
         processEventDueNow(&time, &scheduledEvents[i]);
     }
-    processEventDueNow(&time, &scheduledEvent);
 }
 
 static void scheduleEvent(int id, Day day, int minuteOfDay, LightEvent event) {
@@ -102,11 +99,6 @@ static void scheduleEvent(int id, Day day, int minuteOfDay, LightEvent event) {
             break;
         }
     }
-    
-    scheduledEvent.id = id;
-    scheduledEvent.minuteOfDay = minuteOfDay;
-    scheduledEvent.event = event;
-    scheduledEvent.day = day;
 }
 
 void MyLightScheduler_ScheduleTurnOn(int id, Day day, int minuteOfDay)
