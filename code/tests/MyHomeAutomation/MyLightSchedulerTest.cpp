@@ -1,6 +1,8 @@
 extern "C"
 {
 #include "MyLightScheduler.h"
+#include "MyLightControllerSpy.h"
+
 }
 
 #include "CppUTest/TestHarness.h"
@@ -10,6 +12,8 @@ TEST_GROUP(MyLightScheduler)
     void setup()
     {
       MyLightScheduler_Create();
+      MyLightController_Create();
+
     }
 
     void teardown()
@@ -18,11 +22,11 @@ TEST_GROUP(MyLightScheduler)
     }
 };
 
-/*TEST(MyLightScheduler, NoChangeToLightsDuringInitialization)
+TEST(MyLightScheduler, NoChangeToLightsDuringInitialization)
 {
   LONGS_EQUAL(LIGHT_ID_UNKNOWN, MyLightControllerSpy_GetLastId());
   LONGS_EQUAL(LIGHT_STATE_UNKNOWN, MyLightControllerSpy_GetLastState());
-}*/
+}
 
 /*TEST(MyFakeTimeService, NoScheduleNothingHapens)
 {
