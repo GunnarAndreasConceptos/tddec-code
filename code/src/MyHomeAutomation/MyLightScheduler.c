@@ -114,7 +114,17 @@ int MyLightScheduler_ScheduleTurnOff(int id, Day day, int minuteOfDay)
     return scheduleEvent(id, day, minuteOfDay, TURN_OFF);
 }
 
-void MyLightScheduler_ScheduleRemove(int id, Day day, int minute)
+void MyLightScheduler_ScheduleRemove(int id, Day day, int minuteOfDay)
 {
-
+    int i;
+    for (i = 0; i < MAX_EVENTS; i++)
+    {
+        if (scheduledEvents[i].id == id
+        && scheduledEvents[i].minuteOfDay == minuteOfDay
+        && scheduledEvents[i].day == day)
+        {
+            scheduledEvents[i].id = UNUSED;
+            return;
+        }
+    }
 }
