@@ -153,3 +153,22 @@ TEST(MyLightScheduler, ScheduleOnWeekdayAndItsSaturdayAndItsTime)
   checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
 }
 
+TEST_GROUP(MyLightSchedulerInitAndCleanup)
+{
+};
+
+TEST(MyLightSchedulerInitAndCleanup, CreateStartsOneMinuteAlarm)
+{
+  MyLightScheduler_Create();
+  POINTERS_EQUAL((void *)MyLightScheduler_WakeUp,
+  (void *)MyFakeTimeService_GetAlarmCallback());
+  LONGS_EQUAL(60, MyFakeTimeService_GetAlarmPeriod());
+  MyLightScheduler_Destroy();
+}
+
+/*TEST(MyLightSchedulerInitAndCleanup, DestroyCancelsOneMinuteAlarm)
+{
+  LightScheduler_Create();
+  LightScheduler_Destroy();
+  POINTERS_EQUAL(NULL, (void *)FakeTimeSource_GetAlarmCallback());
+}*/

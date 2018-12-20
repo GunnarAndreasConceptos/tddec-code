@@ -28,3 +28,13 @@ void MyTimeService_GetTime(Time *time)
     time->dayOfWeek = fakeTime.dayOfWeek;
     time->minuteOfDay = fakeTime.minuteOfDay;
 }
+
+int MyFakeTimeService_GetAlarmPeriod(void)
+{
+    return 60;
+}
+
+MyWakeupCallback MyFakeTimeService_GetAlarmCallback(void) 
+{
+    return 0;
+}

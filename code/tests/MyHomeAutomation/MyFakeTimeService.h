@@ -15,5 +15,7 @@ void MyFakeTimeService_Destroy(void);
 
 void MyFakeTimeService_SetMinute(int);
 void MyFakeTimeService_SetDay(int);
+MyWakeupCallback MyFakeTimeService_GetAlarmCallback(void);
+int MyFakeTimeService_GetAlarmPeriod(void);
 
 #endif  /* D_FakeMyFakeTimeService_H */
