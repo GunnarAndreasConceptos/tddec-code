@@ -44,7 +44,7 @@ static void processEventDueNow(const Time * time, const ScheduledLightEvent * li
         return;
     if(reactionDay != EVERYDAY && reactionDay != WEEKEND && reactionDay != today)
         return;
-    if(reactionDay == WEEKEND && today != SATURDAY)
+    if(reactionDay == WEEKEND && today != SATURDAY && today != SUNDAY)
         return;
     if (time->minuteOfDay != lightEvent->minuteOfDay)
         return;
