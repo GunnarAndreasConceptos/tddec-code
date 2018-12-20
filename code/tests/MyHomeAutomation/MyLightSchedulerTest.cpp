@@ -18,6 +18,12 @@ TEST_GROUP(MyLightScheduler)
     }
 };
 
+/*TEST(MyLightScheduler, NoChangeToLightsDuringInitialization)
+{
+  LONGS_EQUAL(LIGHT_ID_UNKNOWN, MyLightControllerSpy_GetLastId());
+  LONGS_EQUAL(LIGHT_STATE_UNKNOWN, MyLightControllerSpy_GetLastState());
+}*/
+
 //Will implement code for this test later
 /*TEST(MyLightScheduler, ScheduleOnEverydayNotTimeYet)
 {

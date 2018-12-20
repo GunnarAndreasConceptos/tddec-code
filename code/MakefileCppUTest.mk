@@ -20,9 +20,9 @@ SRC_DIRS = \
 	src/MyOS \
 	src/MyOS/posix \
 	src/zune \
-	src/MyLedDriver \
 
-TEST_SRC_DIRS = \
+
+#TEST_SRC_DIRS = \
 	.\
 	mocks\
 	mocks\
@@ -35,7 +35,11 @@ TEST_SRC_DIRS = \
 	tests/dvr\
 	tests\
 	tests/MyOS\
-	tests/MyLedDriver \
+	tests/MyHomeAutomation \
+
+TEST_SRC_DIRS = \
+	tests\
+	tests/MyHomeAutomation \
 
 	
 INCLUDE_DIRS =\
@@ -49,7 +53,7 @@ INCLUDE_DIRS =\
   include/MyOS\
   include/dvr\
   include/zune\
-  include/MyLedDriver\
+	include/MyHomeAutomation\
 
 MOCKS_SRC_DIRS = \
 	mocks\
