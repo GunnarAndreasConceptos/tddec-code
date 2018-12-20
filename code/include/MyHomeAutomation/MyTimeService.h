@@ -1,9 +1,7 @@
 #ifndef D_MyTimeService_H
 #define D_MyTimeService_H
 
-typedef enum  {
-    SUNDAY=1, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-} Day;
+#include "MyLightScheduler.h"
 
 typedef struct Time
 {

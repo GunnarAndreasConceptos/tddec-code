@@ -20,6 +20,7 @@ SRC_DIRS = \
 	src/MyOS \
 	src/MyOS/posix \
 	src/zune \
+	src/MyHomeAutomation \
 
 
 #TEST_SRC_DIRS = \
