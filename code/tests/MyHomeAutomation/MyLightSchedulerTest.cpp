@@ -191,6 +191,22 @@ TEST(MyLightScheduler, RemoveRecyclesScheduleSlot)
   LONGS_EQUAL(LS_OK, MyLightScheduler_ScheduleTurnOn(13, MONDAY, 1000));
 }
 
+TEST(MyLightScheduler, RemoveMultipleScheduledEvent)
+{
+  MyLightScheduler_ScheduleTurnOn(6, MONDAY, 600);
+  MyLightScheduler_ScheduleTurnOn(7, MONDAY, 600);
+
+  MyLightScheduler_ScheduleRemove(6, MONDAY, 600);
+
+  setTimeTo(MONDAY, 600);
+
+  MyLightScheduler_WakeUp();
+
+  checkLightState(6, LIGHT_STATE_UNKNOWN);
+  checkLightState(7, LIGHT_ON);
+}
+
+
 
 TEST_GROUP(MyLightSchedulerInitAndCleanup)
 {
