@@ -166,9 +166,9 @@ TEST(MyLightSchedulerInitAndCleanup, CreateStartsOneMinuteAlarm)
   MyLightScheduler_Destroy();
 }
 
-/*TEST(MyLightSchedulerInitAndCleanup, DestroyCancelsOneMinuteAlarm)
+TEST(MyLightSchedulerInitAndCleanup, DestroyCancelsOneMinuteAlarm)
 {
-  LightScheduler_Create();
-  LightScheduler_Destroy();
-  POINTERS_EQUAL(NULL, (void *)FakeTimeSource_GetAlarmCallback());
-}*/
+  MyLightScheduler_Create();
+  MyLightScheduler_Destroy();
+  POINTERS_EQUAL(NULL, (void *)MyFakeTimeService_GetAlarmCallback());
+}
