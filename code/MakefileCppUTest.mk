@@ -20,6 +20,7 @@ SRC_DIRS = \
 	src/MyOS \
 	src/MyOS/posix \
 	src/zune \
+	src/MyLedDriver \
 
 TEST_SRC_DIRS = \
 	.\
@@ -34,6 +35,7 @@ TEST_SRC_DIRS = \
 	tests/dvr\
 	tests\
 	tests/MyOS\
+	tests/MyLedDriver \
 
 	
 INCLUDE_DIRS =\
@@ -47,6 +49,7 @@ INCLUDE_DIRS =\
   include/MyOS\
   include/dvr\
   include/zune\
+  include/MyLedDriver\
 
 MOCKS_SRC_DIRS = \
 	mocks\
