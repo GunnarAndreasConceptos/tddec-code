@@ -206,7 +206,18 @@ TEST(MyLightScheduler, RemoveMultipleScheduledEvent)
   checkLightState(7, LIGHT_ON);
 }
 
+TEST(MyLightScheduler, AcceptsValidLightIds)
+{
+  LONGS_EQUAL(LS_OK, MyLightScheduler_ScheduleTurnOn(0, MONDAY, 600));
+  LONGS_EQUAL(LS_OK, MyLightScheduler_ScheduleTurnOn(15, MONDAY, 600));
+  LONGS_EQUAL(LS_OK, MyLightScheduler_ScheduleTurnOn(31, MONDAY, 600));
+}
 
+TEST(MyLightScheduler, RejectsInvalidLightIds)
+{
+  LONGS_EQUAL(LS_ID_OUT_OF_BOUNDS, MyLightScheduler_ScheduleTurnOn(-1, MONDAY, 600));
+  LONGS_EQUAL(LS_ID_OUT_OF_BOUNDS, MyLightScheduler_ScheduleTurnOn(32, MONDAY, 600));
+}
 
 TEST_GROUP(MyLightSchedulerInitAndCleanup)
 {
