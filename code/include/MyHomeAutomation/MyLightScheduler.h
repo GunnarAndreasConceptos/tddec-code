@@ -12,12 +12,13 @@ typedef enum  {
 } Day;
 
 enum {UNUSED = -1};
+enum { LS_OK, LS_TOO_MANY_EVENTS };
 
 void MyLightScheduler_Create(void);
 void MyLightScheduler_Destroy(void);
 
 void MyLightScheduler_WakeUp(void);
-void MyLightScheduler_ScheduleTurnOn(int id, Day day, int minute);
+int MyLightScheduler_ScheduleTurnOn(int id, Day day, int minute);
 void MyLightScheduler_ScheduleTurnOff(int id, Day day, int minute);
 
 #endif  /* D_FakeMyLightScheduler_H */

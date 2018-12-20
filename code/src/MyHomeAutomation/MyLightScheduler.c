@@ -101,9 +101,10 @@ static void scheduleEvent(int id, Day day, int minuteOfDay, LightEvent event) {
     }
 }
 
-void MyLightScheduler_ScheduleTurnOn(int id, Day day, int minuteOfDay)
+int MyLightScheduler_ScheduleTurnOn(int id, Day day, int minuteOfDay)
 {
     scheduleEvent(id, day, minuteOfDay, TURN_ON);
+    return LS_OK;
 }
 
 void MyLightScheduler_ScheduleTurnOff(int id, Day day, int minuteOfDay)
