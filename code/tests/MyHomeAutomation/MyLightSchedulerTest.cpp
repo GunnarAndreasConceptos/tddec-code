@@ -24,6 +24,19 @@ TEST_GROUP(MyLightScheduler)
   LONGS_EQUAL(LIGHT_STATE_UNKNOWN, MyLightControllerSpy_GetLastState());
 }*/
 
+/*TEST(MyFakeTimeService, NoScheduleNothingHapens)
+{
+  MyFakeTimeService_SetDay(MONDAY);
+  MyFakeTimeService_SetMinute(100);
+
+  LightSceduler_WakeUp();
+
+  LONGS_EQUAL(LIGHT_ID_UNKNOWN, MyLightControllerSpy_GetLastId());
+  LONGS_EQUAL(LIGHT_STATE_UNKNOWN, MyLightControllerSpy_GetLastState());
+
+}*/
+
+
 //Will implement code for this test later
 /*TEST(MyLightScheduler, ScheduleOnEverydayNotTimeYet)
 {
