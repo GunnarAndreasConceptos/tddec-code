@@ -2,6 +2,14 @@
 
 
 static Time fakeTime;
+
+typedef struct {
+    MyWakeupCallback cb;
+    int period;
+} Alarm;
+
+static Alarm fakeAlarm;
+
 void MyFakeTimeService_Create(void)
 {
     fakeTime.dayOfWeek = TIME_UNKNOWN;
@@ -31,10 +39,16 @@ void MyTimeService_GetTime(Time *time)
 
 int MyFakeTimeService_GetAlarmPeriod(void)
 {
-    return 60;
+    return fakeAlarm.period;
 }
 
 MyWakeupCallback MyFakeTimeService_GetAlarmCallback(void) 
 {
-    return 0;
+    return fakeAlarm.cb;
+}
+
+void MyTimeService_SetPeriodicAlarmInSeconds(int seconds, MyWakeupCallback callback)
+{
+    fakeAlarm.period = seconds;
+    fakeAlarm.cb = callback;
 }
