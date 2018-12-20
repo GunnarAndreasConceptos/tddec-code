@@ -14,6 +14,7 @@ enum
     LIGHT_OFF = 0, LIGHT_ON = 1
 };
 
+int MyLightControllerSpy_GetLightState(int id);
 int MyLightControllerSpy_GetLastId(void);
 int MyLightControllerSpy_GetLastState(void);
 
