@@ -44,9 +44,9 @@ static int DoesLightRespontToday(const Time * time, int reactionDay) {
         return TRUE;
     if (reactionDay == WEEKEND && (today == SATURDAY || today == SUNDAY))
         return TRUE;
-    if (reactionDay == WEEKDAY && today == MONDAY)
+    if (reactionDay == WEEKDAY && (today >= MONDAY && today <= FRIDAY))
         return TRUE;
-        
+
     return FALSE;
 }
 
