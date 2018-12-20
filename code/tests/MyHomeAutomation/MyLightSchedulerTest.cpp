@@ -160,6 +160,17 @@ TEST(MyLightScheduler, ScheduleOnWeekdayAndItsSaturdayAndItsTime)
   checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
 }
 
+TEST(MyLightScheduler, ScheduleTwoEventsAtTheSameTIme)
+{
+  MyLightScheduler_ScheduleTurnOn(3, SUNDAY, 1200);
+  MyLightScheduler_ScheduleTurnOn(12, SUNDAY, 1200);
+  setTimeTo(SUNDAY, 1200);
+  MyLightScheduler_WakeUp();
+  checkLightState(3, LIGHT_ON);
+  checkLightState(12, LIGHT_ON);
+}
+
+
 TEST_GROUP(MyLightSchedulerInitAndCleanup)
 {
 };
