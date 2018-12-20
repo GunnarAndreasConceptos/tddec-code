@@ -9,3 +9,7 @@ void MyLightScheduler_Destroy(void)
 }
 
 
+void MyLightScheduler_WakeUp(void)
+{
+
+}

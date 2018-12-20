@@ -2,7 +2,7 @@ extern "C"
 {
 #include "MyLightScheduler.h"
 #include "MyLightControllerSpy.h"
-
+#include "MyFakeTimeService.h"
 }
 
 #include "CppUTest/TestHarness.h"
@@ -18,7 +18,8 @@ TEST_GROUP(MyLightScheduler)
 
     void teardown()
     {
-       MyLightScheduler_Destroy();
+      MyLightScheduler_Destroy();
+      MyLightController_Destroy();
     }
 };
 
@@ -28,17 +29,17 @@ TEST(MyLightScheduler, NoChangeToLightsDuringInitialization)
   LONGS_EQUAL(LIGHT_STATE_UNKNOWN, MyLightControllerSpy_GetLastState());
 }
 
-/*TEST(MyFakeTimeService, NoScheduleNothingHapens)
+TEST(MyLightScheduler, NoScheduleNothingHapens)
 {
   MyFakeTimeService_SetDay(MONDAY);
   MyFakeTimeService_SetMinute(100);
 
-  LightSceduler_WakeUp();
+  MyLightScheduler_WakeUp();
 
   LONGS_EQUAL(LIGHT_ID_UNKNOWN, MyLightControllerSpy_GetLastId());
   LONGS_EQUAL(LIGHT_STATE_UNKNOWN, MyLightControllerSpy_GetLastState());
 
-}*/
+}
 
 
 //Will implement code for this test later
