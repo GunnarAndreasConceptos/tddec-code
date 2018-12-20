@@ -1,5 +1,5 @@
 #include "MyFakeTimeService.h"
-
+#include "common.h"
 
 static Time fakeTime;
 
@@ -51,4 +51,13 @@ void MyTimeService_SetPeriodicAlarmInSeconds(int seconds, MyWakeupCallback callb
 {
     fakeAlarm.period = seconds;
     fakeAlarm.cb = callback;
+}
+
+void MyTimeService_CancelPeriodicAlarmInSeconds(int seconds, MyWakeupCallback callback)
+{
+    if (fakeAlarm.cb == callback && fakeAlarm.period == seconds)
+    {
+        fakeAlarm.cb = NULL;
+        fakeAlarm.period = 0;
+    }
 }

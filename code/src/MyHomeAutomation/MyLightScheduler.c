@@ -27,6 +27,7 @@ void MyLightScheduler_Create(void)
 
 void MyLightScheduler_Destroy(void)
 {
+    MyTimeService_CancelPeriodicAlarmInSeconds(60, MyLightScheduler_WakeUp);
 }
 
 static void operateLight(const ScheduledLightEvent * lightEvent)
