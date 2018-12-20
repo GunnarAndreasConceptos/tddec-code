@@ -72,3 +72,11 @@ TEST(MyLightScheduler, ScheduleOffEverydayItsTime)
   MyLightScheduler_WakeUp();
   checkLightState(3, LIGHT_OFF);
 }
+
+TEST(MyLightScheduler, ScheduleTuesdayButItsMonday)
+{
+  MyLightScheduler_ScheduleTurnOff(3, TUESDAY, 1200);
+  setTimeTo(TUESDAY, 1200);
+  MyLightScheduler_WakeUp();
+  checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
+}
