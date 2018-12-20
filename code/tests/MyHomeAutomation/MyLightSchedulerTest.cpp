@@ -121,4 +121,10 @@ TEST(MyLightScheduler, ScheduleWeekEndItsMonday)
   checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
 }
 
-
+TEST(MyLightScheduler, WeekdayScheduleNotOperatedOnSunday)
+{
+  MyLightScheduler_ScheduleTurnOn(3, WEEKDAY, 1200);
+  setTimeTo(SUNDAY, 1200);
+  MyLightScheduler_WakeUp();
+  checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
+}
