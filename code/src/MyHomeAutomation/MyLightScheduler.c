@@ -113,3 +113,8 @@ int MyLightScheduler_ScheduleTurnOff(int id, Day day, int minuteOfDay)
 {
     return scheduleEvent(id, day, minuteOfDay, TURN_OFF);
 }
+
+void MyLightScheduler_ScheduleRemove(int id, Day day, int minute)
+{
+
+}

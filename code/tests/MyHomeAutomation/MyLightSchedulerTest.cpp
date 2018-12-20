@@ -181,6 +181,17 @@ TEST(MyLightScheduler, RejectsTooManyEvents)
 
 }
 
+TEST(MyLightScheduler, RemoveRecyclesScheduleSlot)
+{
+  int i;
+  for (i = 0; i < 128; i++) {
+    LONGS_EQUAL(LS_OK, MyLightScheduler_ScheduleTurnOn(6, MONDAY, 600+i));
+  }
+  MyLightScheduler_ScheduleRemove(6, MONDAY, 600);
+  LONGS_EQUAL(LS_OK, MyLightScheduler_ScheduleTurnOn(13, MONDAY, 1000));
+}
+
+
 TEST_GROUP(MyLightSchedulerInitAndCleanup)
 {
 };
