@@ -30,8 +30,15 @@ TEST_GROUP(MyLightScheduler)
 
     void checkLightState(int id, int level)
     {
-      LONGS_EQUAL(id, MyLightControllerSpy_GetLastId());
-      LONGS_EQUAL(level, MyLightControllerSpy_GetLastState());
+      if(id == LIGHT_ID_UNKNOWN)
+      {
+        LONGS_EQUAL(id, MyLightControllerSpy_GetLastId());
+        LONGS_EQUAL(level, MyLightControllerSpy_GetLastState());
+      }
+      else
+      {
+        LONGS_EQUAL(level, MyLightControllerSpy_GetLightState(id));
+      }
     }
 };
 

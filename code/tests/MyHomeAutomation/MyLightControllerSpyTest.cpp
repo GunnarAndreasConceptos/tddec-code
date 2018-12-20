@@ -16,20 +16,7 @@ TEST_GROUP(MyLightControllerSpy)
     {
        MyLightController_Destroy();
     }
-    
-    void checkLightState(int id, int level)
-    {
-      if(id == LIGHT_ID_UNKNOWN)
-      {
-        LONGS_EQUAL(id, MyLightControllerSpy_GetLastId());
-        LONGS_EQUAL(level, MyLightControllerSpy_GetLastState());
-      }
-      else
-      {
-        LONGS_EQUAL(level, MyLightControllerSpy_GetLightState(id));
-      }
-    }
-};
+    };
 
 TEST(MyLightControllerSpy, Create)
 {
@@ -50,8 +37,8 @@ TEST(MyLightControllerSpy, RememberAllLightStates)
   MyLightController_On(0);
   MyLightController_Off(31);
 
-  checkLightState(0, LIGHT_ON);
-  checkLightState(31, LIGHT_OFF);
+  LONGS_EQUAL(LIGHT_ON, MyLightControllerSpy_GetLightState(0));
+  LONGS_EQUAL(LIGHT_OFF, MyLightControllerSpy_GetLightState(31));
 }
 
 
