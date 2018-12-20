@@ -16,11 +16,19 @@ typedef struct
     Day day;
 } ScheduledLightEvent;
 
+#define MAX_EVENTS 128
+
 static ScheduledLightEvent scheduledEvent;
+static ScheduledLightEvent scheduledEvents[MAX_EVENTS];
 
 void MyLightScheduler_Create(void)
 {
     scheduledEvent.id = UNUSED;
+    int i;
+    for (i = 0; i < MAX_EVENTS; i++)
+    {
+        scheduledEvents[i].id = UNUSED;
+    }
 
     MyTimeService_SetPeriodicAlarmInSeconds(60, MyLightScheduler_WakeUp);
 }
@@ -73,10 +81,28 @@ void MyLightScheduler_WakeUp(void)
     Time time;
     MyTimeService_GetTime(&time);
 
+    int i;
+    for (i = 0; i < MAX_EVENTS; i++)
+    {
+        processEventDueNow(&time, &scheduledEvents[i]);
+    }
     processEventDueNow(&time, &scheduledEvent);
 }
 
 static void scheduleEvent(int id, Day day, int minuteOfDay, LightEvent event) {
+    int i;
+    for (i = 0; i < MAX_EVENTS; i++)
+    {
+        if (scheduledEvents[i].id == UNUSED)
+        {
+            scheduledEvents[i].id = id;
+            scheduledEvents[i].minuteOfDay = minuteOfDay;
+            scheduledEvents[i].event = event;
+            scheduledEvents[i].day = day;
+            break;
+        }
+    }
+    
     scheduledEvent.id = id;
     scheduledEvent.minuteOfDay = minuteOfDay;
     scheduledEvent.event = event;
