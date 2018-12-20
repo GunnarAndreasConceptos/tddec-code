@@ -96,3 +96,11 @@ TEST(MyLightScheduler, ScheduleWeekEndItsFriday)
   MyLightScheduler_WakeUp();
   checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
 }
+
+TEST(MyLightScheduler, ScheduleWeekEndItsSaturday)
+{
+  MyLightScheduler_ScheduleTurnOn(3, WEEKEND, 1200);
+  setTimeTo(SATURDAY, 1200);
+  MyLightScheduler_WakeUp();
+  checkLightState(3, LIGHT_ON);
+}
