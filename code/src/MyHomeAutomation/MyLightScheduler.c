@@ -1,6 +1,7 @@
 #include "MyLightScheduler.h"
 #include "MyTimeService.h"
 #include "MyLightController.h"
+#include "common.h"
 
 typedef enum {
     TURN_ON,
@@ -35,16 +36,25 @@ static void operateLight(const ScheduledLightEvent * lightEvent)
 
 }
 
+static int DoesLightRespontToday(const Time * time, int reactionDay) {
+    int today = time->dayOfWeek;
+    if (reactionDay == EVERYDAY)
+        return TRUE;
+    if (reactionDay == today)
+        return TRUE;
+    if (reactionDay == WEEKEND && (today == SATURDAY || today == SUNDAY))
+        return TRUE;
+
+    return FALSE;
+}
+
 static void processEventDueNow(const Time * time, const ScheduledLightEvent * lightEvent)
 {
     int reactionDay = lightEvent->day;
-    int today = time->dayOfWeek;
     
     if (lightEvent->id == UNUSED)
         return;
-    if(reactionDay != EVERYDAY && reactionDay != WEEKEND && reactionDay != today)
-        return;
-    if(reactionDay == WEEKEND && today != SATURDAY && today != SUNDAY)
+    if(!DoesLightRespontToday(time, reactionDay))
         return;
     if (time->minuteOfDay != lightEvent->minuteOfDay)
         return;
