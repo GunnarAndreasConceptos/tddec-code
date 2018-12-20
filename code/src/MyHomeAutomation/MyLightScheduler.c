@@ -39,3 +39,8 @@ void MyLightScheduler_ScheduleTurnOn(int id, Day day, int minuteOfDay)
     scheduledEvent.id = id;
     scheduledEvent.minuteOfDay = minuteOfDay;
 }
+
+void MyLightScheduler_ScheduleTurnOff(int id, Day day, int minuteOfDay)
+{
+
+}

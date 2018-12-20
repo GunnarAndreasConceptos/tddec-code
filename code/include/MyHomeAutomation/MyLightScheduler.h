@@ -18,5 +18,6 @@ void MyLightScheduler_Destroy(void);
 
 void MyLightScheduler_WakeUp(void);
 void MyLightScheduler_ScheduleTurnOn(int id, Day day, int minute);
+void MyLightScheduler_ScheduleTurnOff(int id, Day day, int minute);
 
 #endif  /* D_FakeMyLightScheduler_H */
