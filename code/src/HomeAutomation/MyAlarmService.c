@@ -40,7 +40,7 @@ void MyAlarmService_WakeUp()
     MsTime currentTime;
     MyMsTimeService_GetTime(&currentTime);
 
-    if (currentTime.msec == alarm.msEpochTime) {
+    if (currentTime.msec >= alarm.msEpochTime) {
         alarm.cb();
     }
 }
