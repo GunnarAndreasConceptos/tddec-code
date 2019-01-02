@@ -135,3 +135,4 @@ TEST(MyAlarmService, ScheduleTwoAlarmsRunBothAndEnsureTheyAreBothOnlyRunOnce)
     LONGS_EQUAL(2, callBackCounter);
 }
 
+/*TODO: Add tests for alarm boundaries. Maybe add different callbacks.*/
