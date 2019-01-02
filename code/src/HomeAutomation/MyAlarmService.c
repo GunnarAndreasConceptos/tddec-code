@@ -7,21 +7,28 @@ typedef struct Alarm {
     long msEpochTime;
 } Alarm;
 
+
 static Alarm alarm;
+static Alarm scheduledAlarms[MAX_ALARMS];
 
 enum {
     ALARM_UNUSED = -1
 };
 
-void resetAlarm(void)
+void resetAlarm(Alarm *alarm)
 {
-    alarm.cb = NULL;
-    alarm.msEpochTime = ALARM_UNUSED;
+    alarm->cb = NULL;
+    alarm->msEpochTime = ALARM_UNUSED;
 }
 
 void MyAlarmService_Create(void)
 {
-    resetAlarm();
+    resetAlarm(&alarm);
+    int i;
+    for (i = 0; i < MAX_ALARMS; i++)
+    {
+        resetAlarm(&scheduledAlarms[i]);
+    }
 }
 
 void MyAlarmService_Destroy(void)
@@ -42,26 +49,41 @@ void MyAlarmService_ScheduleAlarm(long msEpochTime, AlarmCallback cb)
 {
     alarm.cb = cb;
     alarm.msEpochTime = msEpochTime;
+
+    int i;
+    for (i = 0; i < MAX_ALARMS; i++)
+    {
+        if (scheduledAlarms[i].msEpochTime == ALARM_UNUSED)
+        {
+            scheduledAlarms[i].msEpochTime = msEpochTime;
+            scheduledAlarms[i].cb = cb;
+            return;
+        }
+    }
 }
 
-BOOL isAlarmValid(void)
+BOOL isAlarmValid(Alarm *alarm)
 {
-    return (alarm.msEpochTime != ALARM_UNUSED && alarm.cb != NULL);
+    return (alarm->msEpochTime != ALARM_UNUSED && alarm->cb != NULL);
 }
 
 void MyAlarmService_WakeUp()
 {
-    if (!isAlarmValid())
-    {
-        return;
-    }
 
     MsTime currentTime;
     MyMsTimeService_GetTime(&currentTime);
 
-    if (currentTime.msec >= alarm.msEpochTime)
+    int i;
+    for (i = 0; i < MAX_ALARMS; i++)
     {
-        alarm.cb();
-        resetAlarm();
+        Alarm* currentAlarm = &scheduledAlarms[i];
+        if (isAlarmValid(currentAlarm))
+        {
+            if (currentTime.msec >= currentAlarm->msEpochTime)
+            {
+                currentAlarm->cb();
+                resetAlarm(currentAlarm);
+            }
+        }
     }
 }

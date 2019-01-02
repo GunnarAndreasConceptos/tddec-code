@@ -3,6 +3,7 @@
 
 #include "MyMsTimeService.h"
 
+enum{MAX_ALARMS = 128};
 typedef void (*AlarmCallback)(void);
 
 void MyAlarmService_Create(void);
