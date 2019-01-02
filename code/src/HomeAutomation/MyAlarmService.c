@@ -9,10 +9,19 @@ typedef struct Alarm {
 
 static Alarm alarm;
 
-void MyAlarmService_Create(void)
+enum {
+    ALARM_UNUSED = -1
+};
+
+void resetAlarm(void)
 {
     alarm.cb = NULL;
-    alarm.msEpochTime = -1;
+    alarm.msEpochTime = ALARM_UNUSED;
+}
+
+void MyAlarmService_Create(void)
+{
+    resetAlarm();
 }
 
 void MyAlarmService_Destroy(void)
@@ -40,7 +49,10 @@ void MyAlarmService_WakeUp()
     MsTime currentTime;
     MyMsTimeService_GetTime(&currentTime);
 
-    if (currentTime.msec >= alarm.msEpochTime) {
+    if (currentTime.msec >= alarm.msEpochTime
+        && alarm.msEpochTime != ALARM_UNUSED
+        && alarm.cb != NULL) {
         alarm.cb();
+        resetAlarm();
     }
 }
