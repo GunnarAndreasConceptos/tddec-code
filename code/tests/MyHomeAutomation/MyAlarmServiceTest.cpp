@@ -76,3 +76,15 @@ TEST(MyAlarmService, ScheduledAlarmRunsAfterTime)
     MyAlarmService_WakeUp();
     LONGS_EQUAL(1, callBackCounter);
 }
+
+
+TEST(MyAlarmService, AlarmsAreOnlyRunOnce)
+{
+    scheduleTestCallback(500);
+
+    MyFakeMsTimeService_SetMilliSeconds(501);
+    MyAlarmService_WakeUp();
+    MyAlarmService_WakeUp();
+
+    LONGS_EQUAL(1, callBackCounter);
+}
