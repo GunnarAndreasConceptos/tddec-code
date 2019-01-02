@@ -44,14 +44,23 @@ void MyAlarmService_ScheduleAlarm(long msEpochTime, AlarmCallback cb)
     alarm.msEpochTime = msEpochTime;
 }
 
+BOOL isAlarmValid(void)
+{
+    return (alarm.msEpochTime != ALARM_UNUSED && alarm.cb != NULL);
+}
+
 void MyAlarmService_WakeUp()
 {
+    if (!isAlarmValid())
+    {
+        return;
+    }
+
     MsTime currentTime;
     MyMsTimeService_GetTime(&currentTime);
 
-    if (currentTime.msec >= alarm.msEpochTime
-        && alarm.msEpochTime != ALARM_UNUSED
-        && alarm.cb != NULL) {
+    if (currentTime.msec >= alarm.msEpochTime)
+    {
         alarm.cb();
         resetAlarm();
     }
