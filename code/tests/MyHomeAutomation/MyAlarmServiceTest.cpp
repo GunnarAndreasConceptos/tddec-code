@@ -53,3 +53,13 @@ TEST(MyAlarmService, ScheduledAlarmDoesNotRunBeforeTime)
     MyAlarmService_WakeUp();
     LONGS_EQUAL(0, callBackCounter);
 }
+
+TEST(MyAlarmService, ScheduledAlarmRunsOnTime)
+{
+    AlarmCallback CallBack = (AlarmCallback)testCallback;
+    MyAlarmService_ScheduleAlarm(500, CallBack);
+
+    MyFakeMsTimeService_SetMilliSeconds(500);
+    MyAlarmService_WakeUp();
+    LONGS_EQUAL(1, callBackCounter);
+}
