@@ -88,3 +88,26 @@ TEST(MyAlarmService, AlarmsAreOnlyRunOnce)
 
     LONGS_EQUAL(1, callBackCounter);
 }
+
+TEST(MyAlarmService, ScheduleTwoAlarmsAndNoneRuns)
+{
+    scheduleTestCallback(2);
+    scheduleTestCallback(4);
+
+    MyFakeMsTimeService_SetMilliSeconds(1);
+    MyAlarmService_WakeUp();
+
+    LONGS_EQUAL(0, callBackCounter);
+}
+
+TEST(MyAlarmService, ScheduleTwoAlarmsAndOneRuns)
+{
+    scheduleTestCallback(2);
+    scheduleTestCallback(4);
+
+    MyFakeMsTimeService_SetMilliSeconds(3);
+    MyAlarmService_WakeUp();
+
+    LONGS_EQUAL(1, callBackCounter);
+}
+
