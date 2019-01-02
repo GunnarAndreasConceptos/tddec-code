@@ -26,6 +26,11 @@ TEST_GROUP(MyAlarmService)
        MyAlarmService_Destroy();
     }
 
+    void scheduleTestCallback(long msTime)
+    {
+        AlarmCallback callBack = (AlarmCallback)testCallback;
+        MyAlarmService_ScheduleAlarm(msTime, callBack);
+    }
 };
 
 
@@ -38,16 +43,16 @@ TEST(MyAlarmService, Create)
 
 TEST(MyAlarmService, ScheduleSingleAlarm)
 {
-    AlarmCallback CallBack = (AlarmCallback)testCallback;
-    MyAlarmService_ScheduleAlarm(500, CallBack);
-    POINTERS_EQUAL(CallBack, MyAlarmService_GetLastCallback());
+    AlarmCallback callBack = (AlarmCallback)testCallback;
+    MyAlarmService_ScheduleAlarm(500, callBack);
+
+    POINTERS_EQUAL(callBack, MyAlarmService_GetLastCallback());
     LONGS_EQUAL(500, MyAlarmService_GetLastTimestamp());
 }
 
 TEST(MyAlarmService, ScheduledAlarmDoesNotRunBeforeTime)
 {
-    AlarmCallback CallBack = (AlarmCallback)testCallback;
-    MyAlarmService_ScheduleAlarm(500, CallBack);
+    scheduleTestCallback(500);
 
     MyFakeMsTimeService_SetMilliSeconds(400);
     MyAlarmService_WakeUp();
@@ -56,8 +61,7 @@ TEST(MyAlarmService, ScheduledAlarmDoesNotRunBeforeTime)
 
 TEST(MyAlarmService, ScheduledAlarmRunsOnTime)
 {
-    AlarmCallback CallBack = (AlarmCallback)testCallback;
-    MyAlarmService_ScheduleAlarm(500, CallBack);
+    scheduleTestCallback(500);
 
     MyFakeMsTimeService_SetMilliSeconds(500);
     MyAlarmService_WakeUp();
