@@ -11,5 +11,6 @@ void MyAlarmService_Destroy(void);
 void MyAlarmService_ScheduleAlarm(long msEpochTime, AlarmCallback cb);
 AlarmCallback MyAlarmService_GetLastCallback(void);
 long MyAlarmService_GetLastTimestamp(void);
+void MyAlarmService_WakeUp(void);
 
 #endif  /* D_MyAlarmService_H */

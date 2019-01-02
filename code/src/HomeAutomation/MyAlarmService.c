@@ -34,3 +34,8 @@ void MyAlarmService_ScheduleAlarm(long msEpochTime, AlarmCallback cb)
     alarm.cb = cb;
     alarm.msEpochTime = msEpochTime;
 }
+
+void MyAlarmService_WakeUp()
+{
+    
+}
