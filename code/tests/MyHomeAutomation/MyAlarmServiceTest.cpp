@@ -16,7 +16,13 @@ TEST_GROUP(MyAlarmService)
     {
        MyAlarmService_Destroy();
     }
+
 };
+
+void testCallback(void)
+{
+
+}
 
 TEST(MyAlarmService, Create)
 {
@@ -25,3 +31,10 @@ TEST(MyAlarmService, Create)
 }
 
 
+TEST(MyAlarmService, ScheduleSingleAlarm)
+{
+    AlarmCallback CallBack = (AlarmCallback)testCallback;
+    MyAlarmService_ScheduleAlarm(500, CallBack);
+    POINTERS_EQUAL(CallBack, MyAlarmService_GetLastCallback());
+    LONGS_EQUAL(500, MyAlarmService_GetLastTimestamp());
+}

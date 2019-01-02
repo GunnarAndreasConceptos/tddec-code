@@ -14,7 +14,12 @@ AlarmCallback MyAlarmService_GetLastCallback(void)
     return NULL;
 }
 
-int MyAlarmService_GetLastTimestamp(void)
+long MyAlarmService_GetLastTimestamp(void)
 {
     return -1;
+}
+
+void MyAlarmService_ScheduleAlarm(long msEpochTime, AlarmCallback cb)
+{
+
 }
