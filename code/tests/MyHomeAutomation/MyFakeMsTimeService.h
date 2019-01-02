@@ -7,5 +7,5 @@ enum {TIME_UNKNOWN = -1};
 
 void MyFakeMsTimeService_Create(void);
 void MyFakeMsTimeService_Destroy(void);
-
+void MyFakeMsTimeService_SetMilliSeconds(long msec);
 #endif

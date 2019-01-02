@@ -23,3 +23,13 @@ TEST(MyFakeMsTimeService, Create)
 
     LONGS_EQUAL(TIME_UNKNOWN, time.msec);
 }
+
+TEST(MyFakeMsTimeService, SetTime)
+{
+    MyFakeMsTimeService_SetMilliSeconds(5000);
+
+    MsTime time;
+    MyMsTimeService_GetTime(&time);
+
+    LONGS_EQUAL(5000, time.msec);
+}
